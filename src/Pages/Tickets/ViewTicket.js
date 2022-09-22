@@ -17,6 +17,7 @@ export default function ViewTicket() {
   const fetchTicketDetails = async () => {
     setLoading(true);
     const { 0: statusCode, 1: resp } = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${id}`);
+    console.log(resp);
     if (statusCode === httpStatusCode.SUCCESS) {
       setLoading(false);
       setData(resp.data[0]);

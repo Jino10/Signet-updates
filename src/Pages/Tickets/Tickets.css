@@ -3,6 +3,104 @@
   top: 0;
 }
 
+.tableData {
+  border-radius: 30px;
+  height: 500px;
+}
+
+.btnPrimary {
+  background-color: #16216c !important;
+  color: #fff !important;
+  min-height: 38px !important;
+  min-width: 50px !important;
+  border-radius: 10px !important;
+  border: 0;
+}
+
+.tokenImage {
+  margin-right: 10px;
+}
+
+.ticketNo {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #16216c;
+  margin-left: 15px;
+}
+
+.tokenBox {
+  margin-bottom: 20px;
+}
+
+.problemHeading {
+  color: #16216c;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: #16216c;
+  margin-bottom: 16px;
+}
+
+.descriptionBox {
+  margin-left: 30px;
+}
+
+.status {
+  color: #16216c;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.statusData {
+  height: 50px;
+  width: 230px;
+  text-align: center;
+  background-color: #ced4da;
+  margin-bottom: 10px;
+}
+
+.scrollData {
+  margin-left: 30px;
+}
+
+.statusAdjacent {
+  position: absolute;
+  top: 230px;
+  right: 140px;
+}
+
+.priorityAdjacent {
+  position: absolute;
+  top: 320px;
+  right: 190px;
+}
+
+.assigneImage {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  position: absolute;
+  top: 402px;
+  right: 230px;
+}
+
+.arrowSet {
+  position: absolute;
+  top: 320px;
+  right: 260px;
+}
+
+.buttonLight {
+  background-color: #16216c !important;
+  color: white !important;
+  width: 80px !important;
+}
+
+.buttonAlign {
+  text-align: center;
+}
+
 .view-heading {
   font-weight: 600;
 }
@@ -10,9 +108,11 @@
 .actionBox {
   gap: 10px;
 }
+
 .actionBox img {
   cursor: pointer;
 }
+
 .titleHeader {
   background-color: var(--white);
   padding: 20px;
@@ -21,6 +121,7 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .titleHeader .info h6 {
   color: var(--secondary);
   font-size: 28px;
@@ -46,40 +147,50 @@
   gap: 10px;
   cursor: pointer;
 }
+
 .disabledImg {
   opacity: 0.3;
 }
+
 .pagingBox .current {
   color: var(--primary);
 }
+
 .pagingBox .total {
   color: #8c8c8c;
 }
+
 .userModal .modal-content {
   border-radius: 20px !important;
 }
+
 .userModal .modal-header {
   border-bottom: 0 !important;
 }
+
 .userModal .modal-title {
   color: #16216c;
   font-size: 18px;
   font-weight: 600;
 }
+
 .userModal .btn-close {
   font-size: 12px;
   font-weight: 600;
 }
+
 .userModal .modal-body {
   padding-top: 10px !important;
   padding-bottom: 0 !important;
 }
+
 .userModal .form-control,
 .userModal .form-select {
   min-height: 50px !important;
   color: #6c757d !important;
   width: 100%;
 }
+
 .userModal .form-control:focus,
 .userModal .form-select:focus {
   box-shadow: none !important;
@@ -93,10 +204,12 @@
 .status-group {
   position: relative;
 }
+
 .modal-body .input-group input,
 .modal-body .input-group select {
   width: 100% !important;
 }
+
 .input-group::after {
   content: '*';
   position: absolute;
@@ -104,6 +217,7 @@
   left: 93px;
   color: #f00;
 }
+
 .org-group::after {
   content: '*';
   position: absolute;
@@ -111,6 +225,7 @@
   left: 117px;
   color: #f00;
 }
+
 .email-group::after {
   content: '*';
   position: absolute;
@@ -118,6 +233,7 @@
   left: 57px;
   color: #f00;
 }
+
 .role-group::after {
   content: '*';
   position: absolute;
@@ -125,6 +241,7 @@
   left: 47px;
   color: #f00;
 }
+
 .status-group::after {
   content: '*';
   position: absolute;
@@ -132,11 +249,13 @@
   left: 64px;
   color: #f00;
 }
+
 .userModal .modal-footer {
   border-top: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 14px !important;
 }
+
 .userModal .saveBtn {
   background-color: #16216c !important;
   color: #fff !important;
@@ -144,17 +263,25 @@
   min-width: 115px !important;
   border-radius: 10px !important;
 }
+
 .imgProfile {
   width: 10%;
 }
+
 .ticketTable .btn-link {
   padding-left: 0;
 }
+
 @media only screen and (max-width: 767px) {
   .imgProfile {
     width: 35%;
   }
 }
+
+.col-lg-5 {
+  border-right: 1px solid black !important;
+}
+
 .truncate {
   display: -webkit-box;
   -webkit-line-clamp: 3;

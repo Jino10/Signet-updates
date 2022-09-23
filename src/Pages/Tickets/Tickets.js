@@ -39,8 +39,8 @@ function Tickets() {
     );
     if (statusCode === httpStatusCode.SUCCESS) {
       setIsLoading(false);
-      setUser(data.data);
-      setFirstData(data.data[0]);
+      setUser(data?.data);
+      setFirstData(data?.data[0]);
     } else {
       setShowAlert(true);
       setError(true);
@@ -92,9 +92,9 @@ function Tickets() {
   }, []);
 
   useEffect(() => {
-    if (initialData.priority > 3 || firstData.priority > 3) {
+    if (initialData?.priority > 3 || firstData?.priority > 3) {
       setArrow(true);
-    } else if (initialData.priority <= 3 || firstData.priority <= 3) {
+    } else if (initialData?.priority <= 3 || firstData?.priority <= 3) {
       setArrow(false);
     }
   }, [firstData.priority, initialData.priority]);
@@ -137,7 +137,7 @@ function Tickets() {
             </div>
           </div>
           <Row>
-            <Col lg={4}>
+            <Col lg={4} md={12} sm={12}>
               <div className='tableData'>
                 <div className="input-group">
                   <input type="text" className="form-control" placeholder="Search this blog" onChange={(e) => setSearch(e.target.value)} />
@@ -154,7 +154,7 @@ function Tickets() {
                         if (search === '') {
                           return user;
                         }
-                        if (user.problem.toLowerCase().includes(search.toLowerCase())) {
+                        if (user?.problem.toLowerCase().includes(search.toLowerCase())) {
                           return user;
                         }
                         return false;
@@ -175,21 +175,21 @@ function Tickets() {
                 </table>
               </div>
             </Col>
-            <Col lg={5}>
+            <Col lg={5} md={6} sm={12}>
               <div className='descriptionBox'>
                 <div className='tokenBox'>
-                  <img className='tokenImage' src="/images/signetImage/ticket.png" alt="" /><span className='ticketNo'>{datas ? initialData.ticketNo : firstData.ticketNo}</span>
+                  <img className='tokenImage' src="/images/signetImage/ticket.png" alt="" /><span className='ticketNo'>{datas ? initialData?.ticketNo : firstData?.ticketNo}</span>
                 </div>
-                <h5 className='problemHeading'>{datas ? initialData.problem : firstData.problem}</h5>
+                <h5 className='problemHeading'>{datas ? initialData?.problem : firstData?.problem}</h5>
                 <h6 className='description'>Description</h6>
-                <p>{datas ? initialData.description : firstData.description}</p>
+                <p>{datas ? initialData?.description : firstData?.description}</p>
               </div>
             </Col>
-            <Col lg={3}>
+            <Col lg={3} md={6} sm={12}>
               <div className='scrollData'>
                 <p className='status'>Status</p>
                 <div className='statusData'>
-                  <span className='statusAdjacent'>{datas ? initialData.status : firstData.status}</span>
+                  <span className='statusAdjacent'>{datas ? initialData?.status : firstData?.status}</span>
                 </div>
                 <p className='status'>Priority</p>
                 <div className='statusData'>
@@ -198,12 +198,12 @@ function Tickets() {
                 </div>
                 <p className='status'>Assignee</p>
                 <div className='statusData'>
-                  <span className=''><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData.assignedTo : firstData.assignedTo}</span>
+                  <span className=''><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData?.assignedTo : firstData?.assignedTo}</span>
                 </div>
                 <p className='status'>Created date</p>
-                <h6>{datas ? initialData.createdDate : firstData.createdDate}</h6>
+                <h6>{datas ? initialData?.createdDate : firstData?.createdDate}</h6>
                 <p className='status'>Created By</p>
-                <h6>{datas ? initialData.createdBy : firstData.createdBy}</h6>
+                <h6>{datas ? initialData?.createdBy : firstData?.createdBy}</h6>
               </div>
             </Col>
           </Row>

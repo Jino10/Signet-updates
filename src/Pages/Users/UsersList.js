@@ -31,6 +31,7 @@ function UsersList({ userId }) {
   const [lastIndex, setLastIndex] = useState(7);
   const [updateData, setUpdateData] = useState({});
   const [searchData, setSearchData] = useState('');
+  const [count, setCount] = useState(1);
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
@@ -52,8 +53,23 @@ function UsersList({ userId }) {
   const handleClick = async (id) => {
     setEditId(id);
     setShowEdit(true);
-    const { 0: statusCode, 1: { data } } = await fetchCall(`${APIUrlConstants.GET_USER_DETAILS}/${id}`);
-    setUpdateData(data);
+    const {
+      0: statusCode,
+      1: { data },
+    } = await makeRequest(`${APIUrlConstants.GET_USER_DETAILS}/${id}`);
+    if (statusCode === httpStatusCode.SUCCESS) {
+      const res = data;
+      const userValues = {
+        firstName: res?.firstName ?? '',
+        lastName: res?.lastName ?? '',
+        orgEmail: res?.orgEmail ?? '',
+        orgName: res?.organization ?? '',
+        roleId: res?.roleId ?? '',
+        status: res?.status ?? '',
+        userId: id,
+      };
+      setUpdateData(userValues);
+    }
   }
 
   const deleteUser = async () => {
@@ -147,14 +163,16 @@ function UsersList({ userId }) {
     setUpdateData({ ...updateData, status: e });
   }
 
-  const data = users.slice(firstIndex, lastIndex);
+  const userData = users.slice(firstIndex, lastIndex);
 
   const nextCall = () => {
+    setCount(count + 1);
     setFirstIndex(firstIndex + 7);
     setLastIndex(lastIndex + 7);
   }
 
   const previousCall = () => {
+    setCount(count - 1);
     setFirstIndex(firstIndex - 7);
     setLastIndex(lastIndex - 7);
   }
@@ -186,7 +204,7 @@ function UsersList({ userId }) {
         </thead>
         <tbody>
           {
-            data.filter((datas) => {
+            userData.filter((datas) => {
               if (searchData === '') {
                 return datas;
               }
@@ -240,8 +258,10 @@ function UsersList({ userId }) {
               )}
         </tbody>
         <div className='pageBtn'>
-          <span><i class="fa fa-angle-double-left" aria-hidden="true" /></span><Button className='previousBtn' onClick={previousCall}>Previous page</Button>
-          <Button className='nextBtn' onClick={nextCall}>Next page</Button><span><i class="fa fa-angle-double-right" aria-hidden="true" /></span>
+          <span><i class="fa fa-angle-double-left" aria-hidden="true" /></span>
+          <Button className='previousBtn' onClick={previousCall}>01</Button>
+          <Button className='nextBtn' onClick={nextCall}>{count}</Button>
+          <span><i class="fa fa-angle-double-right" aria-hidden="true" /></span>
         </div>
       </table>
 
@@ -271,5 +291,4 @@ function UsersList({ userId }) {
     </div>
   );
 }
-
 export default UsersList;

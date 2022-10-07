@@ -29,6 +29,7 @@ export default function Chats() {
   const [playBackRate, setPlayBackRate] = useState(1.0);
   const ScreenRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const timeIntervalRef = useRef(null);
 
   useEffect(() => {
     if (roledId === userRoleId.remoteSmartUser) {
@@ -73,10 +74,10 @@ export default function Chats() {
   }
 
   const handleRewind = () => {
-    playerRef.current.seekTo(playerRef.current.getCurrentTime() - 10);
+    playerRef.current.seekTo?.(playerRef.current.getCurrentTime() - 10);
   }
   const handleFastForward = () => {
-    playerRef.current.seekTo(playerRef.current.getCurrentTime() + 10);
+    playerRef.current.seekTo?.(playerRef.current.getCurrentTime() + 10);
   }
 
   const handleVolumeOff = () => {
@@ -126,17 +127,28 @@ export default function Chats() {
   const totalMoment = `${hours}:${minutes}:${seconds}`;
 
   const timeInterval = () => {
-    const interval = setInterval(() => {
-      setCurrentTime(playerRef.current.getCurrentTime());
+    timeIntervalRef.current = setInterval(() => {
+      setCurrentTime(playerRef.current?.getCurrentTime());
     }, 1000);
     return () => {
-      clearInterval(interval);
-    };
+      clearInterval(timeIntervalRef.current);
+    }
   }
 
   useEffect(() => {
-    timeInterval();
-  }, []);
+    if (currentTime === totalValue) {
+      setPlayState(false);
+      clearInterval(timeIntervalRef.current);
+    }
+  }, [currentTime]);
+
+  useEffect(() => {
+    if (playState === true) {
+      timeInterval();
+    } else {
+      clearInterval(timeIntervalRef.current);
+    }
+  }, [playState]);
 
   const currentVariable = (currentTime / totalValue) * 100;
 

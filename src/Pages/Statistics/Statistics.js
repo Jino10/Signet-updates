@@ -9,7 +9,7 @@ import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import './Statistics.css';
 
 import { Pie } from 'react-chartjs-2';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -85,7 +85,7 @@ function Statistics() {
         if (userData) {
             const organization = [];
             userData.map((values) => {
-                if (values?.organization !== '') {
+                if (values?.organization !== '' && values?.organization !== null) {
                     organization.push(values.organization);
                 }
                 return false;
@@ -173,7 +173,7 @@ function Statistics() {
                                                 {
                                                     filter.map((val) =>
                                                         <tr>
-                                                            <td value={val.userId} onClick={() => handleClick(val.userId)}>{val.firstName}</td>
+                                                            <td value={val.userId} onClick={() => handleClick(val.userId)}><Link to='/edituser'>{val.firstName}</Link></td>
                                                             <td>{val.organization}</td>
                                                             <td>{val.orgEmail}</td>
                                                             <td>{val.status}</td>

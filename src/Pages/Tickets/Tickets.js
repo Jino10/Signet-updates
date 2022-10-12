@@ -97,7 +97,7 @@ function Tickets() {
     } else if (initialData?.priority <= 3 || firstData?.priority <= 3) {
       setArrow(false);
     }
-  }, [firstData.priority, initialData.priority]);
+  }, [firstData?.priority, initialData?.priority]);
 
   const emptyDataMessage = () =>
     !isLoading ? (
@@ -161,9 +161,9 @@ function Tickets() {
                       })
                         .map((val) =>
                           <tr onClick={() => ticketView(val.ticketNo)}>
-                            <td className='truncate' value={val.ticketNo}><img className='tokenImage' src="/images/signetImage/ticket.png" alt="" class="pe-2 activeImg" />{val.ticketNo}<br />
+                            <td className='truncate' value={val?.ticketNo}><img className='tokenImage' src="/images/signetImage/ticket.png" alt="" class="pe-2 activeImg" />{val?.ticketNo}<br />
                               <br />
-                              {val.problem}</td>
+                              {val?.problem}</td>
                           </tr>
                         )
                     }

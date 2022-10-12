@@ -513,7 +513,7 @@ function SignUp() {
                     required
                     onChange={onAgreeTermsChanage}
                   />
-                  <Form.Check.Label className="p-2">Agree to terms and conditions</Form.Check.Label>
+                  <Form.Check.Label className="p-2">Agree to <Link to='/termsandconditions' target='_blank'> terms and conditions </Link></Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column mb-1">

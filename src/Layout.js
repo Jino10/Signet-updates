@@ -21,6 +21,8 @@ import Notification from './Pages/Notification/Notification';
 import HealthCharts from './Pages/HealthCharts/HealthCharts';
 import Profile from './Pages/Profile/Profile';
 import Statistics from './Pages/Statistics/Statistics';
+import TermsCondition from './Pages/Terms&Condition/TermsCondition';
+import Privacypolicy from './Pages/PrivacyPolicy/Privacypolicy';
 import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
@@ -49,6 +51,10 @@ function Layout(props) {
       return <OTPVerification />;
     case components.RESET:
       return <ResetPassword />;
+    case components.TERMS_AND_CONDITIONS:
+      return <TermsCondition />;
+    case components.PRIVACY_AND_POLICY:
+      return <Privacypolicy />;
     case components.DASHBOARD:
       return LayoutWithHeader(<Dashboard />);
     case components.ANNOUNCEMENT:
@@ -76,7 +82,7 @@ function Layout(props) {
     case components.PROFILE:
       return LayoutWithHeader(<Profile />);
     case components.STATISTICS:
-      return LayoutWithHeader(<Statistics />)
+      return LayoutWithHeader(<Statistics />);
 
     default:
       return <div>Component not found</div>;

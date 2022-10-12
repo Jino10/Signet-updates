@@ -37,7 +37,9 @@ export const components = {
   TWO_FACTOR: 'TWO_FACTOR',
   NOTIFICATION: 'NOTIFICATION',
   PROFILE: 'PROFILE',
-  STATISTICS: 'STATISTICS'
+  STATISTICS: 'STATISTICS',
+  TERMS_AND_CONDITIONS: 'TERMS_AND_CONDITIONS',
+  PRIVACY_AND_POLICY: 'PRIVACY_AND_POLICY'
 };
 
 export const gaEvents = {
@@ -84,7 +86,9 @@ export const gaEvents = {
   CREATE_NEW_TICKET: 'create_new_ticket',
   UPDATE_TICKET_DETAILS: 'update_ticket_details',
   CONTACT_SALES: 'contact_sales',
-  NAVIGATE_STATISTICS: 'navigate_statistics'
+  NAVIGATE_STATISTICS: 'navigate_statistics',
+  NAVIGATE_TERMS_AND_CONDITIONS: 'navigate_terms_and_conditions',
+  NAVIGATE_PRIVACY_AND_POLICY: 'navigate_privacy_and_policy'
 };
 
 export const aboutSignet =

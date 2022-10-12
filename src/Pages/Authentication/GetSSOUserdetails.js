@@ -6,7 +6,7 @@ import Loading from '../Widgets/Loading';
 import './Login.css';
 import './SignUp.css';
 import { fetchCall } from '../../Services/APIService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Alerts from '../Widgets/Alerts';
 import { useForm } from 'react-hook-form';
 import { authentication } from '../../Config/FirebaseConfig';
@@ -39,6 +39,7 @@ function GetSSOUserdetails() {
   const [showModal, setShowModal] = useState(false);
   const [wrongOtp, setWrongOtp] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker();
+  const [agree, setAgree] = useState(false);
 
   const [user, setUser] = useState({
     email: '',
@@ -149,18 +150,18 @@ function GetSSOUserdetails() {
     }
   }, [navigate]);
 
-  const redirecttologin = useCallback(
-    () => (localStorage.getItem('temp_token') ? getUserDetails() : navigate('/')),
-    [getUserDetails, navigate],
-  );
+  // const redirecttologin = useCallback(
+  //   () => (localStorage.getItem('temp_token') ? getUserDetails() : navigate('/')),
+  //   [getUserDetails, navigate],
+  // );
 
-  useEffect(() => {
-    redirecttologin();
-  }, [redirecttologin]);
+  // useEffect(() => {
+  //   redirecttologin();
+  // }, [redirecttologin]);
 
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_SSO_USER_DETAILS);
-    if (otpVer === true || !user.orgName) {
+    if (otpVer === true && agree === true || !user.orgName) {
       setIsLoading(true);
       const { 0: statusCode, 1: responseData } = await fetchCall(APIUrlConstants.CREATE_USER_WITH_ORG, apiMethods.POST, user);
       if (statusCode === httpStatusCode.SUCCESS) {
@@ -205,12 +206,12 @@ function GetSSOUserdetails() {
       'sign-in-button',
       {
         size: 'invisible',
-        callback: () => {},
+        callback: () => { },
       },
       authentication,
     );
   };
-  const phoneNumber = '+1' + user.primaryPhone;
+  const phoneNumber = '+91' + user.primaryPhone;
   const requestOtp = () => {
     if (user.primaryPhone.length === 10) {
       setToogle(true);
@@ -270,6 +271,11 @@ function GetSSOUserdetails() {
       setValidOtp(true);
     }
   };
+
+  const onAgreeTermsChange = (event) => {
+    setAgree(event.target.checked);
+  }
+
   return (
     <Container fluid className="lognWrapper">
       {showAlert && (
@@ -348,7 +354,7 @@ function GetSSOUserdetails() {
                         </div>
                       ) : null}
 
-                      {toogle === true ? (
+                      {toogle ? (
                         <Row>
                           <Col xs={12} md={6}>
                             <Form.Group controlId="formPhone">
@@ -390,47 +396,60 @@ function GetSSOUserdetails() {
                             </Form.Group>
                           </Col>
                         </Row>
-                      ) : null}
-                      {toogle === false ? (
-                        <Row>
-                          <Col xs={12} md={12}>
-                            <div className="d-flex  align-items-start w-100 customVerifyBox">
-                              <Form.Group controlId="formPhone" className="inputHolder w-100">
-                                <Form.Control
-                                  required
-                                  className="user-detail-button"
-                                  pattern="^\(\d{3}\)\s\d{3}-\d{4}"
-                                  type="text"
-                                  placeholder="Phone Number"
-                                  autoComplete="off"
-                                  value={user?.primaryPhone}
-                                  onChange={phoneChange}
-                                  isInvalid={validPhone}
-                                />
-                                {validPhone === true ? (
-                                  <Form.Control.Feedback type="invalid" data-testid="phonerr">
-                                    Enter a valid Phone Number
-                                  </Form.Control.Feedback>
-                                ) : null}
-                              </Form.Group>
-                              <div className="verify-button-wrap">
-                                <Button
-                                  className="verifyBtn btn-block mt-0"
-                                  variant="primary"
-                                  type="submit"
-                                  onClick={() => {
-                                    requestOtp();
-                                    buttonTracker(gaEvents.SEND_OTP);
-                                  }}
-                                  data-testid="verifybtn"
-                                >
-                                  <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify
-                                </Button>
+                      ) :
+                        (
+                          <Row>
+                            <Col xs={12} md={12}>
+                              <div className="d-flex  align-items-start w-100 customVerifyBox">
+                                <Form.Group controlId="formPhone" className="inputHolder w-100">
+                                  <Form.Control
+                                    required
+                                    className="user-detail-button"
+                                    pattern="^\(\d{3}\)\s\d{3}-\d{4}"
+                                    type="text"
+                                    placeholder="Phone Number"
+                                    autoComplete="off"
+                                    value={user?.primaryPhone}
+                                    onChange={phoneChange}
+                                    isInvalid={validPhone}
+                                  />
+                                  {validPhone === true ? (
+                                    <Form.Control.Feedback type="invalid" data-testid="phonerr">
+                                      Enter a valid Phone Number
+                                    </Form.Control.Feedback>
+                                  ) : null}
+                                </Form.Group>
+                                <div className="verify-button-wrap">
+                                  <Button
+                                    className="verifyBtn btn-block mt-0"
+                                    variant="primary"
+                                    type="submit"
+                                    onClick={() => {
+                                      requestOtp();
+                                      buttonTracker(gaEvents.SEND_OTP);
+                                    }}
+                                    data-testid="verifybtn"
+                                  >
+                                    <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify
+                                  </Button>
+                                </div>
                               </div>
-                            </div>
-                          </Col>
-                        </Row>
-                      ) : null}
+                            </Col>
+                          </Row>
+                        )}
+                      <Row>
+                        <Col>
+                          <Form.Group controlId="formBasicCheckbox" className="customCheck mb-2 mt-2">
+                            <Form.Check.Input
+                              data-testid="termsCheckbox"
+                              required
+                              onChange={onAgreeTermsChange}
+                            />
+                            <Form.Check.Label className="p-2">Agree to <Link to='/termsandconditions' target='_blank'> terms and conditions </Link></Form.Check.Label>
+                            <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                      </Row>
 
                       <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center">
                         <input

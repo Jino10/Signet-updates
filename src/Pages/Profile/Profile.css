@@ -1,9 +1,94 @@
 .profile-cancel {
   padding-right: 20px;
 }
+
 .profile-buttons {
   display: flex;
 }
+
+h6 {
+  color: #16216c;
+}
+
+.first-data-block {
+  position: absolute;
+  right: 37%;
+  top: 26%;
+}
+
+.second-data-block {
+  position: absolute;
+  right: 15%;
+  top: 28%;
+}
+
+.button-block {
+  position: absolute;
+  top: 62%;
+  left: 55%;
+}
+
+.wrapperCard {
+  height: 450px !important;
+}
+
+.verifyBtn {
+  height: 6% !important;
+}
+
+.form-label {
+  color: #16216c !important;
+}
+
+.profile-image {
+  height: 27%;
+  width: 15%;
+  border-radius: 50%;
+  position: absolute;
+  left: 23%;
+}
+
+span {
+  margin-left: 5px;
+}
+
+.name-block {
+  position: absolute;
+  left: 29%;
+  top: 55%;
+}
+
+.upload-block {
+  position: absolute;
+  left: 24%;
+  top: 60%;
+}
+
+.buttonLight {
+  background-color: #EAEAEA !important;
+  color: #858282 !important;
+  min-height: 45px !important;
+  min-width: 150px !important;
+  border-radius: 10px !important;
+  border: 1px solid #EAEAEA !important;
+}
+
+.line {
+  position: absolute;
+  width: 0px;
+  height: 40%;
+  left: 40%;
+  top: 23%;
+  border: 1px solid #E1E1E1;
+}
+
+.edit-icon {
+  position: absolute;
+  left: 35%;
+  top: 29%;
+  color: #16216c;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 480px) {
   .otpGap {
     padding-top: 16px;

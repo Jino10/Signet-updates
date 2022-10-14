@@ -23,6 +23,7 @@ export default function Notification() {
       pageSize: 10,
       status: 'All',
     });
+    console.log(response);
     if (statusCode === httpStatusCode.SUCCESS) {
       setIsLoading(false);
       setNotifications(response.data.content);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Container, Alert, Row, Col } from 'react-bootstrap';
+import { Button, Form, Container, Alert } from 'react-bootstrap';
 import './Profile.css';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
@@ -55,8 +55,8 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    if (user.mobileNumber) {
-      setPhoneFormat(user.mobileNumber);
+    if (user?.mobileNumber) {
+      setPhoneFormat(user?.mobileNumber);
     }
     const timeId = setTimeout(() => {
       setShowAlert(false);
@@ -158,36 +158,36 @@ export default function Profile() {
       setAlertVarient('success');
       setUser((prevState) => ({
         ...prevState,
-        firstName: responseData.data.firstName,
-        lastName: responseData.data.lastName,
-        emailId: responseData.data.orgEmail,
+        firstName: responseData?.data?.firstName,
+        lastName: responseData?.data?.lastName,
+        emailId: responseData?.data?.orgEmail,
         mobileNumber: responseData.data.mobileNumber,
-        orgName: responseData.data.organization,
+        orgName: responseData?.data?.organization,
       }));
       localStorage.setItem(
         'user',
         JSON.stringify({
           ...user,
-          firstName: responseData.data.firstName,
-          lastName: responseData.data.lastName,
-          emailId: responseData.data.orgEmail,
-          mobileNumber: responseData.data.mobileNumber,
-          orgName: responseData.data.organization,
+          firstName: responseData?.data?.firstName,
+          lastName: responseData?.data?.lastName,
+          emailId: responseData?.data?.orgEmail,
+          mobileNumber: responseData?.data?.mobileNumber,
+          orgName: responseData?.data?.organization,
         }),
       );
-      localStorage.setItem('firstName', responseData.data.firstName);
-      localStorage.setItem('lastName', responseData.data.lastName);
-      localStorage.setItem('email', responseData.data.orgEmail);
-      localStorage.setItem('mobile', responseData.data.mobileNumber);
-      localStorage.setItem('orgName', responseData.data.organization);
+      localStorage.setItem('firstName', responseData?.data?.firstName);
+      localStorage.setItem('lastName', responseData?.data?.lastName);
+      localStorage.setItem('email', responseData?.data?.orgEmail);
+      localStorage.setItem('mobile', responseData?.data?.mobileNumber);
+      localStorage.setItem('orgName', responseData?.data?.organization);
       dispatch(
         updateUser({
           ...state.user,
-          firstName: responseData.data.firstName,
-          lastName: responseData.data.lastName,
-          orgEmail: responseData.data.orgEmail,
-          mobileNumber: responseData.data.mobileNumber,
-          orgName: responseData.data.organization,
+          firstName: responseData?.data?.firstName,
+          lastName: responseData?.data?.lastName,
+          orgEmail: responseData?.data?.orgEmail,
+          mobileNumber: responseData?.data?.mobileNumber,
+          orgName: responseData?.data?.organization,
         }),
       );
       setIsLoading(false);
@@ -210,14 +210,14 @@ export default function Profile() {
   const handleSubmit = async () => {
     if (user.firstName.length > 0 && user.lastName.length > 0 && user.mobileNumber) {
       setIsLoading(true);
-      const userNumber = user.mobileNumber;
+      const userNumber = user?.mobileNumber;
       const userDetails = {
-        userId: user.userId,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        userId: user?.userId,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
         primaryPhone: userNumber,
-        orgName: user.orgName,
-        emailId: user.emailId
+        orgName: user?.orgName,
+        emailId: user?.emailId
       };
 
       if (userNumber !== phone) {
@@ -277,13 +277,13 @@ export default function Profile() {
               {!isEditable ?
                 (<div>
                   <img className='profile-image' src='images/signetImage/assign.png' alt='' />
-                  <h5 className='name-block'>{user.firstName}<span>{user.lastName}</span></h5>
+                  <h5 className='name-block'>{user?.firstName}<span>{user?.lastName}</span></h5>
                   <div className='line' />
                 </div>) :
                 (
                   <div>
                     <img className='profile-image' src='images/signetImage/assign.png' alt='' />
-                    <h5 className='name-block'>{user.firstName}<span>{user.lastName}</span></h5>
+                    <h5 className='name-block'>{user?.firstName}<span>{user?.lastName}</span></h5>
                     <div className='line' />
                     <i className="fa-solid fa-pen-to-square edit-icon" />
                   </div>
@@ -295,7 +295,7 @@ export default function Profile() {
                     {!isEditable ? (
                       <div>
                         <p>First Name</p>
-                        <h6>{user.firstName}</h6>
+                        <h6>{user?.firstName}</h6>
                       </div>) :
                       (<div className="mb-3 input-group input-container  bit-1">
                         <Form.Group controlId="formFirstName">
@@ -306,7 +306,7 @@ export default function Profile() {
                             type="text"
                             placeholder="First Name"
                             autoComplete="off"
-                            value={user.firstName}
+                            value={user?.firstName}
                             onChange={(e) => {
                               setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
                             }}
@@ -318,7 +318,7 @@ export default function Profile() {
                     {!isEditable ? (
                       <div>
                         <p>Organization Name</p>
-                        <h6>{user.orgName}</h6>
+                        <h6>{user?.orgName}</h6>
                       </div>) :
                       (<div>
                         <Form.Label>Organization Name</Form.Label>
@@ -326,7 +326,7 @@ export default function Profile() {
                           <Form.Control
                             placeholder="Organization Name"
                             type="text"
-                            value={user.orgName}
+                            value={user?.orgName}
                             onChange={(e) => {
                               setUser((prevState) => ({ ...prevState, orgName: e.target.value }))
                             }} />
@@ -407,7 +407,7 @@ export default function Profile() {
                     {!isEditable ? (
                       <div>
                         <p>Last Name</p>
-                        <h6>{user.lastName}</h6>
+                        <h6>{user?.lastName}</h6>
                       </div>) :
                       (<div>
                         <Form.Label>Last Name </Form.Label>
@@ -418,7 +418,7 @@ export default function Profile() {
                             type="text"
                             placeholder="Last Name"
                             autoComplete="off"
-                            value={user.lastName}
+                            value={user?.lastName}
                             onChange={(e) => {
                               setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
                             }}
@@ -429,14 +429,14 @@ export default function Profile() {
                     {!isEditable ? (
                       <div>
                         <p>Organization Email</p>
-                        <h6>{user.emailId}</h6>
+                        <h6>{user?.emailId}</h6>
                       </div>) :
                       (<div>
                         <Form.Label>Organization Email</Form.Label>
                         <Form.Group controlId="formSecondaryEmail" className="inputHolder">
                           <Form.Control placeholder="Organization Email"
                             type="text"
-                            value={user.emailId}
+                            value={user?.emailId}
                             onChange={(e) => {
                               setUser((prevState) => ({ ...prevState, emailId: e.target.value }))
                             }} />

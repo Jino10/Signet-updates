@@ -40,6 +40,10 @@ export default function AddTicket() {
   const { buttonTracker } = useAnalyticsEventTracker();
   const [noApiError, setNoApiError] = useState(true);
   const [apiErrorMsg, setApiErrorMsg] = useState('');
+  const [addDesc, setAddDesc] = useState('');
+  const [estDate, setEstDate] = useState('');
+  const [estTime, setEstTime] = useState('');
+  const [desc, setDesc] = useState('');
 
   const customStyles = {
     control: (base) => ({
@@ -109,6 +113,7 @@ export default function AddTicket() {
           return Current;
         });
         setSelectedValue(Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0].site)[0].siteNo);
+        setDesc(fetchTicket[1]?.data[0].description);
       }
     }
     setLoading(false);
@@ -130,7 +135,7 @@ export default function AddTicket() {
     setSaveLoading(true);
     let ticketObject = { ...PostObject };
     if (id) {
-      ticketObject = { ...PostObject, ticketNo: id };
+      ticketObject = { ...PostObject, ticketNo: id, description: desc + '<br/>' + estDate + '<br/>' + addDesc + '<br/>' + estTime };
       delete ticketObject.assignedTo;
       delete ticketObject.solutionProvided;
       delete ticketObject.createdDate;
@@ -189,6 +194,23 @@ export default function AddTicket() {
     });
   };
 
+  const additionalDesc = (e) => setAddDesc(e.target.value);
+
+  useEffect(() => {
+    const date = new Date();
+    const dateZone = date.toLocaleDateString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const timeZone = date.toLocaleTimeString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const [month, day, year] = dateZone.split('/');
+    const result = `${year}:${month}:${day}`;
+
+    setEstDate(result);
+    setEstTime(timeZone);
+  }, []);
+
   return (
     <div className="wrapperBase">
       {showAlert && (
@@ -216,7 +238,7 @@ export default function AddTicket() {
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col">
                   <Form.Label>
-                    Description <span className="requiredTxt">*</span>
+                    Description {!id && <span className="requiredTxt">*</span>}
                   </Form.Label>
                   <Form.Control
                     as="textarea"
@@ -232,10 +254,27 @@ export default function AddTicket() {
                       });
                     }}
                     value={PostObject.description}
+                    disabled={id}
                   />
                   <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
                 </div>
               </Form.Group>
+              {id && <Form.Group className="mb-3 input-group">
+                <div className="input-container col">
+                  <Form.Label>
+                    Additional Details <span className="requiredTxt">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    className="width-95"
+                    placeholder="Enter additional description"
+                    required
+                    name="additional description"
+                    onChange={additionalDesc}
+                  />
+                  <Form.Control.Feedback type="invalid">Additional description is required</Form.Control.Feedback>
+                </div>
+              </Form.Group>}
               <div className="mb-3 input-group">
                 <Form.Group controlId="siteName" className="input-container col-6">
                   <Form.Label>

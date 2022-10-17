@@ -168,8 +168,8 @@ function Tickets() {
                         )
                     }
                     <div className='buttonAlign'>
-                      <Button className='buttonLight' onClick={previousData}>Previous</Button>
-                      <Button className='buttonLight' onClick={nextData}>Next</Button>
+                      <Button className='pageButtons' onClick={previousData}>Previous</Button>
+                      <Button className='pageButtons' onClick={nextData}>Next</Button>
                     </div>
                   </tbody>
                 </table>
@@ -182,7 +182,9 @@ function Tickets() {
                 </div>
                 <h5 className='problemHeading'>{datas ? initialData?.problem : firstData?.problem}</h5>
                 <h6 className='description'>Description</h6>
-                <p>{datas ? initialData?.description : firstData?.description}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: datas ? initialData?.description : firstData?.description }}
+                />
               </div>
             </Col>
             <Col lg={3} md={6} sm={12}>
@@ -204,6 +206,19 @@ function Tickets() {
                 <h6>{datas ? initialData?.createdDate : firstData?.createdDate}</h6>
                 <p className='status'>Created By</p>
                 <h6>{datas ? initialData?.createdBy : firstData?.createdBy}</h6>
+                <div>
+                  {firstData.callerEmail === localStorage.getItem('email') && (
+                    <Button
+                      className="buttonPrimary text-center"
+                      onClick={() => {
+                        buttonTracker(gaEvents.NAVIGATE_EDIT_TICKET);
+                        navigate(`/ticket/edit/${firstData.ticketNo}`);
+                      }}
+                    >
+                      <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/edit.svg'} alt="" className="pRight6" /> Edit
+                    </Button>
+                  )}
+                </div>
               </div>
             </Col>
           </Row>

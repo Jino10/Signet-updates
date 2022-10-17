@@ -31,6 +31,7 @@ function Tickets() {
   const [datas, setDatas] = useState(false);
   const [firstIndex, setFirstIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(5);
+  const { ticketNo, problem, description, status, priority, assignedTo, createdBy, createdDate, callerEmail } = firstData;
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -73,10 +74,10 @@ function Tickets() {
     </div>
   );
 
-  const ticketView = async (ticketNo) => {
+  const ticketView = async (ticketno) => {
     setIsLoading(true);
     setDatas(true);
-    const { 0: statusCode, 1: resp } = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${ticketNo}`);
+    const { 0: statusCode, 1: resp } = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${ticketno}`);
     if (statusCode === httpStatusCode.SUCCESS) {
       setIsLoading(false);
       setInitialData(resp.data[0]);
@@ -92,12 +93,12 @@ function Tickets() {
   }, []);
 
   useEffect(() => {
-    if (initialData?.priority > 3 || firstData?.priority > 3) {
+    if (initialData?.priority > 3 || priority > 3) {
       setArrow(true);
-    } else if (initialData?.priority <= 3 || firstData?.priority <= 3) {
+    } else if (initialData?.priority <= 3 || priority <= 3) {
       setArrow(false);
     }
-  }, [firstData?.priority, initialData?.priority]);
+  }, [priority, initialData?.priority]);
 
   const emptyDataMessage = () =>
     !isLoading ? (
@@ -178,12 +179,12 @@ function Tickets() {
             <Col lg={5} md={6} sm={12}>
               <div className='descriptionBox'>
                 <div className='tokenBox'>
-                  <img className='tokenImage' src="/images/signetImage/ticket.png" alt="" /><span className='ticketNo'>{datas ? initialData?.ticketNo : firstData?.ticketNo}</span>
+                  <img className='tokenImage' src="/images/signetImage/ticket.png" alt="" /><span className='ticketNo'>{datas ? initialData?.ticketNo : ticketNo}</span>
                 </div>
-                <h5 className='problemHeading'>{datas ? initialData?.problem : firstData?.problem}</h5>
+                <h5 className='problemHeading'>{datas ? initialData?.problem : problem}</h5>
                 <h6 className='description'>Description</h6>
                 <div
-                  dangerouslySetInnerHTML={{ __html: datas ? initialData?.description : firstData?.description }}
+                  dangerouslySetInnerHTML={{ __html: datas ? initialData?.description : description }}
                 />
               </div>
             </Col>
@@ -191,7 +192,7 @@ function Tickets() {
               <div className='scrollData'>
                 <p className='status'>Status</p>
                 <div className='statusData'>
-                  <span className='statusAdjacent'>{datas ? initialData?.status : firstData?.status}</span>
+                  <span className='statusAdjacent'>{datas ? initialData?.status : status}</span>
                 </div>
                 <p className='status'>Priority</p>
                 <div className='statusData'>
@@ -200,19 +201,19 @@ function Tickets() {
                 </div>
                 <p className='status'>Assignee</p>
                 <div className='statusData'>
-                  <span className=''><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData?.assignedTo : firstData?.assignedTo}</span>
+                  <span className=''><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData?.assignedTo : assignedTo}</span>
                 </div>
                 <p className='status'>Created date</p>
-                <h6>{datas ? initialData?.createdDate : firstData?.createdDate}</h6>
+                <h6>{datas ? initialData?.createdDate : createdDate}</h6>
                 <p className='status'>Created By</p>
-                <h6>{datas ? initialData?.createdBy : firstData?.createdBy}</h6>
+                <h6>{datas ? initialData?.createdBy : createdBy}</h6>
                 <div>
-                  {firstData.callerEmail === localStorage.getItem('email') && (
+                  {callerEmail === localStorage.getItem('email') && (
                     <Button
                       className="buttonPrimary text-center"
                       onClick={() => {
                         buttonTracker(gaEvents.NAVIGATE_EDIT_TICKET);
-                        navigate(`/ticket/edit/${firstData.ticketNo}`);
+                        navigate(`/ticket/edit/${ticketNo}`);
                       }}
                     >
                       <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/edit.svg'} alt="" className="pRight6" /> Edit

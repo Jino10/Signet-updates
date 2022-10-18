@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useEffect, useState } from 'react';
-import { Button, Alert, Row, Col } from 'react-bootstrap';
+import { Button, Alert, Row, Col, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -14,6 +14,7 @@ import './Tickets.css';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import ViewTicket from './ViewTicket';
+import AddTicket from './AddTicket';
 
 function Tickets() {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ function Tickets() {
   const [firstIndex, setFirstIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(5);
   const { ticketNo, problem, description, status, priority, assignedTo, createdBy, createdDate, callerEmail } = firstData;
+  const [show, setShow] = useState(false);
+  const [id, setId] = useState('');
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -116,6 +119,17 @@ function Tickets() {
     setLastIndex(lastIndex - 5);
   }
 
+  const handleClose = () => setShow(false);
+
+  const newTicket = () => {
+    setShow(true);
+    setId(null);
+  }
+  const ediTicket = (value) => {
+    setShow(true);
+    setId(value);
+  }
+
   return (
     <div className="wrapperBase">
       <div className="tabelBase" data-test-id="usertable">
@@ -128,10 +142,7 @@ function Tickets() {
             <div className="headerAction d-flex align-items-center">
               <Button
                 className="buttonPrimary"
-                onClick={() => {
-                  buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
-                  navigate(`/ticket/add`);
-                }}
+                onClick={newTicket}
               >
                 <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
               </Button>
@@ -211,10 +222,7 @@ function Tickets() {
                   {callerEmail === localStorage.getItem('email') && (
                     <Button
                       className="buttonPrimary text-center"
-                      onClick={() => {
-                        buttonTracker(gaEvents.NAVIGATE_EDIT_TICKET);
-                        navigate(`/ticket/edit/${ticketNo}`);
-                      }}
+                      onClick={() => ediTicket(ticketNo)}
                     >
                       <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/edit.svg'} alt="" className="pRight6" /> Edit
                     </Button>
@@ -231,6 +239,14 @@ function Tickets() {
             </Alert>
           )
         }
+        <Modal show={show} onHide={handleClose} size='lg'
+          aria-labelledby='contained-modal-title-vcenter'
+          centered
+        >
+          <Modal.Body closeButton>
+            <AddTicket ticket={id} closeModal={handleClose} />
+          </Modal.Body>
+        </Modal>
       </div >
     </div >
   );

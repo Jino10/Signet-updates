@@ -1,0 +1,276 @@
+@media only screen and (min-width: 320px) and (max-width: 670px) {
+    .eBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 30%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .cBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 30%;
+        border-radius: 10px;
+        border: 0;
+        margin-right: 5%;
+    }
+
+    .sBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 30%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .wrapperProfile {
+        margin: 10% 0px 5% 10%;
+    }
+
+    .profileImage {
+        border-radius: 50%;
+        height: 35%;
+        width: 43%;
+    }
+
+    .imageBody {
+        text-align: center;
+        margin-top: 10%;
+    }
+
+    .editIcon {
+        position: absolute;
+        left: 65%;
+        top: 14%;
+        color: #16216c;
+    }
+
+    .fieldAlign {
+        width: 85%;
+        margin: auto;
+    }
+
+    .phoneNum {
+        margin-left: 12%;
+    }
+
+    .formBody {
+        margin: 5%;
+    }
+
+    .numberField {
+        width: 55%;
+    }
+
+    .verBtn {
+        position: absolute;
+        right: 13%;
+        bottom: 15%;
+        height: 4% !important;
+        background-color: #fff !important;
+        color: #16216c;
+        border-color: #16216c;
+    }
+
+    .otpField {
+        width: 25% !important;
+        position: absolute;
+        right: 12%;
+        bottom: 26%;
+    }
+
+    .resendField {
+        position: absolute;
+        right: 15%;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 900px) {
+    .eBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .sBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .cBtn {
+        background-color: #f02b34 !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+        margin-right: 5%;
+    }
+
+    .wrapperProfile {
+        margin: 10% 0px 5% 10%;
+    }
+
+    .profileImage {
+        border-radius: 50%;
+        height: 30%;
+        width: 40%;
+    }
+
+    .imageBody {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .editIcon {
+        position: absolute;
+        left: 65%;
+        top: 21%;
+        color: #16216c;
+    }
+
+    .fieldAlign {
+        width: 85%;
+        margin: auto;
+    }
+
+    .formBody {
+        margin: 5%;
+    }
+
+    .numberField {
+        width: 60%;
+    }
+
+    .phoneNum {
+        margin-left: 12%;
+    }
+
+    .verBtn {
+        position: absolute;
+        right: 14%;
+        bottom: 24%;
+        height: 5%;
+        width: 20%;
+        background-color: #fff !important;
+        color: #16216c;
+        border-color: #16216c;
+    }
+
+    .otpField {
+        width: 25% !important;
+        position: absolute;
+        right: 12%;
+        top: 104%;
+    }
+
+    .resendField {
+        position: absolute;
+        right: 15%;
+        top: 108%;
+    }
+}
+
+@media only screen and (min-width:950px) {
+    .eBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .sBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .cBtn {
+        background-color: #f02b34 !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+        margin-right: 5%;
+    }
+
+    .wrapperProfile {
+        margin: 10% 0px 5% 10%;
+    }
+
+    .profileImage {
+        border-radius: 50%;
+        height: 10%;
+        width: 20%;
+    }
+
+    .imageBody {
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .editIcon {
+        position: absolute;
+        left: 57%;
+        top: 18%;
+        color: #16216c;
+    }
+
+    .fieldAlign {
+        width: 85%;
+        margin: auto;
+    }
+
+    .formBody {
+        margin: 5%;
+    }
+
+    .numberField {
+        width: 60%;
+    }
+
+    .phoneNum {
+        margin-left: 12%;
+    }
+
+    .verBtn {
+        position: absolute;
+        right: 12%;
+        top: 116%;
+        height: 5%;
+        width: 20%;
+        background-color: #fff !important;
+        color: #16216c;
+        border-color: #16216c;
+    }
+
+    .otpField {
+        width: 25% !important;
+        position: absolute;
+        right: 12%;
+        top: 116%;
+    }
+
+    .resendField {
+        position: absolute;
+        top: 120%;
+        right: 12%;
+    }
+}

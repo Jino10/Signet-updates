@@ -26,6 +26,17 @@ import Privacypolicy from './Pages/PrivacyPolicy/Privacypolicy';
 import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
+import Mobtickets from './Signet-Mobile-Web-UI/Mobile-Tickets/Mobtickets';
+import Mobviewticket from './Signet-Mobile-Web-UI/Mobile-Tickets/Mobviewticket';
+import Mobaddticket from './Signet-Mobile-Web-UI/Mobile-Tickets/Mobaddticket';
+import Mobeditticket from './Signet-Mobile-Web-UI/Mobile-Tickets/Mobeditticket';
+import Mobprofile from './Signet-Mobile-Web-UI/Mobile-Profile/Mobprofile';
+import Mobdashboard from './Signet-Mobile-Web-UI/Mobile-Dashboard/Mobdashboard';
+import Mobusers from './Signet-Mobile-Web-UI/Mobile-User/Mobusers';
+import Mobedituser from './Signet-Mobile-Web-UI/Mobile-User/Mobedituser';
+import Mobadduser from './Signet-Mobile-Web-UI/Mobile-User/Mobadduser';
+import Mobnotification from './Signet-Mobile-Web-UI/Mobile-Notification/Mobnotification';
+import Layoutwithmobile from './Signet-Mobile-Web-UI/LayoutwithMobile/Layoutwithmobile';
 
 function Layout(props) {
   const { component } = props;
@@ -83,6 +94,27 @@ function Layout(props) {
       return LayoutWithHeader(<Profile />);
     case components.STATISTICS:
       return LayoutWithHeader(<Statistics />);
+
+    case components.MOB_TICKETS:
+      return Layoutwithmobile(<Mobtickets />);
+    case components.MOB_VIEW_TICKET:
+      return Layoutwithmobile(<Mobviewticket />);
+    case components.MOB_ADD_TICKET:
+      return Layoutwithmobile(<Mobaddticket />);
+    case components.MOB_EDIT_TICKET:
+      return Layoutwithmobile(<Mobeditticket />);
+    case components.MOB_PROFILE:
+      return Layoutwithmobile(<Mobprofile />);
+    case components.MOB_DASHBOARD:
+      return Layoutwithmobile(<Mobdashboard />);
+    case components.MOB_USERS:
+      return Layoutwithmobile(<Mobusers />);
+    case components.MOB_EDIT_USER:
+      return Layoutwithmobile(<Mobedituser />);
+    case components.MOB_ADD_USER:
+      return Layoutwithmobile(<Mobadduser />);
+    case components.MOB_NOTIFICATION:
+      return Layoutwithmobile(<Mobnotification />);
 
     default:
       return <div>Component not found</div>;

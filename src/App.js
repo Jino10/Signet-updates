@@ -11,6 +11,11 @@ import Layout from './Layout';
 import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
 
+// For Signet-Mobile-Web-UI
+import Mobsidebar from './Signet-Mobile-Web-UI/Mobile-Sidebar/Mobsidebar';
+import Mobheader from './Signet-Mobile-Web-UI/Mobile-Header/Mobheader';
+
+
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
   clientId: process.env.REACT_APP_OKTA_AUTH_CLIENT_ID,
@@ -66,6 +71,18 @@ function App() {
             <Route exact path="/profile" element={<Layout component={components.PROFILE} />} />
             <Route exact path="/statistics" element={<Layout component={components.STATISTICS} />} />
             <Route exact path="/privacyandpolicy" element={<Layout component={components.PRIVACY_AND_POLICY} />} />
+
+            <Route exact path="/mobtickets" element={<Layout component={components.MOB_TICKETS} />} />
+            <Route exact path="/mobviewticket/:ticketId" element={<Layout component={components.MOB_VIEW_TICKET} />} />
+            <Route exact path="/mobaddticket" element={<Layout component={components.MOB_ADD_TICKET} />} />
+            <Route exact path="/mobeditticket/:ticketId" element={<Layout component={components.MOB_EDIT_TICKET} />} />
+            <Route exact path="/mobprofile" element={<Layout component={components.MOB_PROFILE} />} />
+            <Route exact path="/mobdashboard" element={<Layout component={components.MOB_DASHBOARD} />} />
+            <Route exact path="/mobnotification" element={<Layout component={components.MOB_NOTIFICATION} />} />
+            <Route exact path="/mobusers" element={<Layout component={components.MOB_USERS} />} />
+            <Route exact path="/mobedituser/:userId" element={<Layout component={components.MOB_EDIT_USER} />} />
+            <Route exact path="/mobadduser" element={<Layout component={components.MOB_ADD_USER} />} />
+
           </Route>
           <Route path="*" element={<Navigate replace to={redirectTo} />} />
           <Route exact path="/" element={token ? <Navigate to={redirectTo} /> : <Layout component={components.LOGIN} />} />
@@ -96,6 +113,9 @@ function App() {
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
           <Route exact path="/termsandconditions" element={<Layout component={components.TERMS_AND_CONDITIONS} />} />
+          {/* Signet-Mobile-Web-UI */}
+          <Route exact path="/mobsidebar" element={<Mobsidebar />} />
+          <Route exact path="/mobheader" element={<Mobheader />} />
         </Routes>
       </Security>
     </Router>

@@ -173,9 +173,9 @@ function Tickets() {
                       })
                         .map((val) =>
                           <tr onClick={() => ticketView(val.ticketNo)}>
-                            <td className='truncate' value={val?.ticketNo}><img className='tokenImage' src="/images/signetImage/ticket.png" alt="" class="pe-2 activeImg" />{val?.ticketNo}<br />
+                            <td value={val?.ticketNo}><img className='tokenImage' src="/images/signetImage/ticket.png" alt="" class="pe-2 activeImg" />{val?.ticketNo}<br />
                               <br />
-                              {val?.problem}</td>
+                              <span className='truncate'>{val?.description}</span></td>
                           </tr>
                         )
                     }

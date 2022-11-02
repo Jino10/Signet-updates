@@ -1,0 +1,18 @@
+.headerBlock {
+    height: 60px;
+    background-color: #16216c;
+    position: relative;
+}
+
+.menuBtn {
+    background-color: aliceblue !important;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.headerBlock .headTitle {
+    text-align: center;
+    color: aliceblue;
+    padding-top: 20px;
+}

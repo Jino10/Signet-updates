@@ -36,9 +36,9 @@ function UsersList({ userId }) {
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
     buttonTracker(gaEvents.OPEN_DELETE_USER);
-    ReactGA.send({ hitType: 'pageview', page: `/deleteuser/${e.target.id}` });
-    sessionStorage.setItem('deleteUserActive', e.target.getAttribute('status'));
-    sessionStorage.setItem('deleteUserId', e.target.id);
+    ReactGA.send({ hitType: 'pageview', page: `/deleteuser/${e.userId}` });
+    sessionStorage.setItem('deleteUserActive', e.status);
+    sessionStorage.setItem('deleteUserId', e.userId);
     setShow(true);
   };
 
@@ -248,7 +248,7 @@ function UsersList({ userId }) {
                     }
                     <Button
                       variant="link"
-                      onClick={handleShow}
+                      onClick={() => handleShow(val)}
                       disabled={val.userId === localStorage.getItem('id') ? 'disabled' : ''}
                     >
                       <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/bin.svg'} alt="Bin" />

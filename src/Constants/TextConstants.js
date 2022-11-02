@@ -39,7 +39,17 @@ export const components = {
   PROFILE: 'PROFILE',
   STATISTICS: 'STATISTICS',
   TERMS_AND_CONDITIONS: 'TERMS_AND_CONDITIONS',
-  PRIVACY_AND_POLICY: 'PRIVACY_AND_POLICY'
+  PRIVACY_AND_POLICY: 'PRIVACY_AND_POLICY',
+  MOB_TICKETS: 'MOB_TICKETS',
+  MOB_VIEW_TICKET: 'MOB_VIEW_TICKET',
+  MOB_ADD_TICKET: 'MOB_ADD_TICKET',
+  MOB_EDIT_TICKET: 'MOB_EDIT_TICKET',
+  MOB_PROFILE: 'MOB_PROFILE',
+  MOB_DASHBOARD: 'MOB_DASHBOARD',
+  MOB_USERS: 'MOB_USERS',
+  MOB_EDIT_USER: 'MOB_EDIT_USER',
+  MOB_ADD_USER: 'MOB_ADD_USER',
+  MOB_NOTIFICATION: 'MOB_NOTIFICATION'
 };
 
 export const gaEvents = {
@@ -88,7 +98,17 @@ export const gaEvents = {
   CONTACT_SALES: 'contact_sales',
   NAVIGATE_STATISTICS: 'navigate_statistics',
   NAVIGATE_TERMS_AND_CONDITIONS: 'navigate_terms_and_conditions',
-  NAVIGATE_PRIVACY_AND_POLICY: 'navigate_privacy_and_policy'
+  NAVIGATE_PRIVACY_AND_POLICY: 'navigate_privacy_and_policy',
+  NAVIGATE_MOB_TICKETS: 'navigate_mob_tickets',
+  NAVIGATE_MOB_VIEW_TICKET: 'navigate_mob_view_ticket',
+  NAVIGATE_MOB_ADD_TICKET: 'navigate_mob_add_ticket',
+  NAVIGATE_MOB_EDIT_TICKET: 'navigate_mob_edit_ticket',
+  NAVIGATE_MOB_PROFILE: 'navigate_mob_profile',
+  NAVIGATE_MOB_DASHBOARD: 'navigate_mob_dashboard',
+  NAVIGATE_MOB_USERS: 'navigate_mob_users',
+  NAVIGATE_MOB_EDIT_USER: 'navigate_mob_edit_user',
+  NAVIGATE_MOB_ADD_USER: 'navigate_mob_add_user',
+  NAVIGATE_MOB_NOTIFICATION: 'navigate_mob_notification'
 };
 
 export const aboutSignet =

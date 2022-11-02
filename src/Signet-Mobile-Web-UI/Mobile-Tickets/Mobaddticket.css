@@ -1,0 +1,116 @@
+@media only screen and (min-width: 320px) and (max-width: 680px) {
+    .priorityField {
+        width: 90%;
+        margin: auto;
+    }
+
+    .siteField {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .problemField {
+        width: 90%;
+        margin: auto;
+    }
+
+    .descriptionField {
+        width: 90%;
+        margin: auto;
+        height: 150px;
+    }
+
+    .newTicketBody {
+        margin: 5% 0px 0px 3%;
+    }
+
+    .cancelBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 30%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .createBtn {
+        background-color: #16216c;
+        color: #fff;
+        min-height: 45px;
+        min-width: 30%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .buttonBody {
+        text-align: center;
+        margin-top: 15%;
+    }
+
+}
+
+@media only screen and (min-width:700px) and (max-width:900px) {
+    .newTicketBody {
+        width: 80%;
+        margin: 10% 0px 0px 10%;
+    }
+
+    .descriptionField {
+        height: 150px;
+    }
+
+    .cancelBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .createBtn {
+        background-color: #16216c;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .buttonBody {
+        margin: 5% 0px 5% 40%;
+    }
+}
+
+@media only screen and (min-width:950px) {
+    .newTicketBody {
+        width: 60%;
+        margin: 5% 0px 0px 20%;
+    }
+
+    .descriptionField {
+        height: 200px;
+    }
+
+    .cancelBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .createBtn {
+        background-color: #16216c;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .buttonBody {
+        margin: 5% 0px 5% 40%;
+    }
+}

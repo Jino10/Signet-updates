@@ -1,0 +1,26 @@
+.fieldHead {
+    color: #16216c;
+    font-weight: bold;
+}
+
+.dataBody {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    position: relative;
+}
+
+.wrapperUsers {
+    margin: 5%;
+}
+
+.binBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.arrowsBtn {
+    text-align: center;
+    margin: 20px 0px 5px 0px;
+}

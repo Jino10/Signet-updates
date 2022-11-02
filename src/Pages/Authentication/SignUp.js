@@ -373,7 +373,7 @@ function SignUp() {
                 ) : null}
                 {toogle === false ? (
                   <Row>
-                    <Col xs={12} md={12}>
+                    <Col xs={8} md={12}>
                       <div className="d-flex  align-items-start w-100 customVerifyBox">
 
                         <Form.Group controlId="formPhone" className="inputHolder w-100">

@@ -1,0 +1,81 @@
+.cancelBtn {
+    background-color: #f02b34;
+    color: #fff;
+    min-height: 45px;
+    min-width: 30%;
+    border-radius: 10px;
+    border: 0;
+}
+
+.saveBtn {
+    background-color: #16216c !important;
+    color: #fff;
+    min-height: 45px;
+    min-width: 30%;
+    border-radius: 10px;
+    border: 0;
+}
+
+.btnBody {
+    text-align: center;
+    margin: 10% 0px 5% 0px;
+}
+
+.editBody {
+    margin: 5%;
+}
+
+@media only screen and (min-width: 700px) and (max-width: 900px) {
+    .descriptionField {
+        width: 90%;
+        margin: auto;
+    }
+
+    .Field {
+        width: 90%;
+        margin: auto;
+    }
+
+    .saveBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .cancelBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15%;
+        border-radius: 10px;
+        border: 0;
+    }
+}
+
+@media only screen and (min-width:950px) {
+    .editBody {
+        margin: auto;
+        width: 60%;
+    }
+
+    .saveBtn {
+        background-color: #16216c !important;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+
+    .cancelBtn {
+        background-color: #f02b34;
+        color: #fff;
+        min-height: 45px;
+        min-width: 15% !important;
+        border-radius: 10px;
+        border: 0;
+    }
+}

@@ -198,6 +198,19 @@ a {
     border-top: 1px solid var(--gray2);
   }
 
+  .hideSidebar {
+    display: none;
+  }
+
+  .truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-indent: 0;
+    text-align: justify;
+  }
+
   .wrapperBase {
     padding: 15px;
   }

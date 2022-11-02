@@ -10,7 +10,7 @@ const LOGOUT_API = `${ENV}/logout`;
 // users API list
 const GET_SSO_USER_DETAILS = `${ENV}/user/isOrgEmail`;
 const CREATE_USER_WITH_ORG = `${ENV}/user/createUserWithOrg`;
-const GET_USER_DETAILS = `${ENV}/user/getUserDetails`;
+const GET_USER_DETAILS = `${ENV}/dashboard/getUserDetails`;
 const FORGET_PASSWORD_API = `${ENV}/user/forgotPassword?email=`;
 const RESET_PASSWORD_API = `${ENV}/user/changePassword`;
 const APPROVE_USER_WITH_MAIL = `${ENV}/user/approveUserWithRole`;

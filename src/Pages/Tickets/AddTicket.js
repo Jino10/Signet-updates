@@ -8,9 +8,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
-export default function AddTicket() {
+export default function AddTicket({ closeModal, ticket }) {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
   const [Priority, setPriority] = useState([]);
   const [ProblemCode, setProblemCode] = useState([]);
@@ -40,6 +40,11 @@ export default function AddTicket() {
   const { buttonTracker } = useAnalyticsEventTracker();
   const [noApiError, setNoApiError] = useState(true);
   const [apiErrorMsg, setApiErrorMsg] = useState('');
+  const [addDesc, setAddDesc] = useState('');
+  const [estDate, setEstDate] = useState('');
+  const [estTime, setEstTime] = useState('');
+  const [desc, setDesc] = useState('');
+  const uniqueId = ticket;
 
   const customStyles = {
     control: (base) => ({
@@ -55,8 +60,8 @@ export default function AddTicket() {
     const fetchPriority = await makeRequest(APIUrlConstants.LIST_PRIORITY);
     const fetchProblemcode = await makeRequest(APIUrlConstants.LIST_PROBLEM_CODE);
     let resolvedArr;
-    if (id) {
-      const fetchTicketView = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${id}`);
+    if (uniqueId !== null) {
+      const fetchTicketView = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${uniqueId}`);
       resolvedArr = await Promise.all([fetchSitelist, fetchPriority, fetchProblemcode, fetchTicketView]);
     } else {
       resolvedArr = await Promise.all([fetchSitelist, fetchPriority, fetchProblemcode]);
@@ -88,8 +93,8 @@ export default function AddTicket() {
       });
       setPriority(PriorityList[1]?.data);
       setProblemCode(ProblemCodeList[1]?.data);
-      setLoading(false);
-      if (id) {
+      setIsLoading(true);
+      if (uniqueId !== null) {
         setOptions(optionArray);
         setPostObject((prev) => {
           const Current = { ...prev };
@@ -109,9 +114,10 @@ export default function AddTicket() {
           return Current;
         });
         setSelectedValue(Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0].site)[0].siteNo);
+        setDesc(fetchTicket[1]?.data[0].description);
       }
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -129,8 +135,8 @@ export default function AddTicket() {
   const saveTicket = async () => {
     setSaveLoading(true);
     let ticketObject = { ...PostObject };
-    if (id) {
-      ticketObject = { ...PostObject, ticketNo: id };
+    if (uniqueId !== null) {
+      ticketObject = { ...PostObject, ticketNo: uniqueId, description: desc + '<br/>' + estDate + '<br/>' + addDesc + '<br/>' + estTime };
       delete ticketObject.assignedTo;
       delete ticketObject.solutionProvided;
       delete ticketObject.createdDate;
@@ -189,6 +195,23 @@ export default function AddTicket() {
     });
   };
 
+  const additionalDesc = (e) => setAddDesc(e.target.value);
+
+  useEffect(() => {
+    const date = new Date();
+    const dateZone = date.toLocaleDateString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const timeZone = date.toLocaleTimeString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const [month, day, year] = dateZone.split('/');
+    const result = `${year}:${month}:${day}`;
+
+    setEstDate(result);
+    setEstTime(timeZone);
+  }, []);
+
   return (
     <div className="wrapperBase">
       {showAlert && (
@@ -201,215 +224,226 @@ export default function AddTicket() {
         />
       )}
       {saveLoading && <Loading />}
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="titleHeader d-flex align-items-center justify-content-between">
-            <div className="info">
-              <h6>{id ? `Edit Ticket # : ${PostObject.ticketNo}` : 'Add Ticket'}</h6>
-            </div>
-          </div>
+      {isLoading && <Loading />}
 
-          <div className="wrapperBase">
-            <Form noValidate validated={validated}>
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col">
-                  <Form.Label>
-                    Description <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    className="width-95"
-                    placeholder="Enter description"
-                    required
-                    name="description"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.description = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={PostObject.description}
-                  />
-                  <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
-                </div>
-              </Form.Group>
-              <div className="mb-3 input-group">
-                <Form.Group controlId="siteName" className="input-container col-6">
-                  <Form.Label>
-                    Site Name <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    className={!selectedValue ? 'text-gray width-90' : 'width-90'}
-                    required
-                    data-testid="siteName"
-                    onChange={handleChange}
-                    placeholder="Search for Site Name"
-                    value={selectedValue}
-                  >
-                    {options.map((i) => (
-                      <option className="text-black" key={i.value} value={i.value}>
-                        {i.label}
-                      </option>
-                    ))}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">Site Name is required</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="priority" className="input-container col-6">
-                  <Form.Label>Priority {!id && <span className="requiredTxt">*</span>}</Form.Label>
-                  <Form.Select
-                    className="width-90"
-                    data-testid="priority"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.priority = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={PostObject.priority}
-                    disabled={id}
-                  >
-                    {Priority.map((i) => (
-                      <option key={i} value={i}>
-                        {i}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>
-              </div>
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col-6">
-                  <Form.Label>Problem Code {!id && <span className="requiredTxt">*</span>}</Form.Label>
-                  <Form.Select
-                    className="width-90"
-                    data-testid="problemCode"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.problem = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={PostObject.problem}
-                    disabled={id}
-                  >
-                    {ProblemCode.map((i) => (
-                      <option key={i} value={i}>
-                        {i}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div>
-                {id && (
-                  <div className="input-container col-6">
-                    <Form.Label>Created Date</Form.Label>
-                    <Form.Control
-                      placeholder="Created Date"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.createdDate}
-                      disabled
-                    />
-                  </div>
-                )}
-              </Form.Group>
-              {id && (
-                <Form.Group className="mb-3 input-group">
-                  <div className="input-container col-6">
-                    <Form.Label>Mobile Number</Form.Label>
-                    <Form.Control
-                      placeholder="Mobile Number"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.phoneNumber}
-                      disabled
-                    />
-                  </div>
-                  <div className="input-container col-6">
-                    <Form.Label>Assigned To</Form.Label>
-                    <Form.Control
-                      placeholder="Assigned To"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.assignedTo}
-                      disabled
-                    />
-                  </div>
-                </Form.Group>
-              )}
-              {id && (
-                <Form.Group className="mb-3 input-group">
-                  <div className="input-container col-6">
-                    <Form.Label>Solution Provided</Form.Label>
-                    <Form.Control
-                      placeholder="Solution Provided"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.solutionProvided}
-                      disabled
-                    />
-                  </div>
-                  <div className="input-container col-6">
-                    <Form.Label>Client Email</Form.Label>
-                    <Form.Control
-                      placeholder="Client Email"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.callerEmail}
-                      disabled
-                    />
-                  </div>
-                </Form.Group>
-              )}
-              {id && (
-                <Form.Group className="mb-3 input-group">
-                  <div className="input-container col-6">
-                    <Form.Label>Created By</Form.Label>
-                    <Form.Control
-                      placeholder="Created By"
-                      type="text"
-                      className="width-90"
-                      value={PostObject.createdBy}
-                      disabled
-                    />
-                  </div>
-                </Form.Group>
-              )}
-            </Form>
-            <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
-              <input
-                className="buttonDefault text-center minHeight45"
-                type="submit"
-                onClick={() => {
-                  buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
-                  navigate('/tickets');
+      <div className="titleHeader d-flex align-items-center justify-content-between">
+        <div className="info">
+          <h6>{uniqueId !== null ? `Edit Ticket # : ${uniqueId}` : 'Add Ticket'}</h6>
+        </div>
+      </div>
+
+      <div className="wrapperBase">
+        <Form noValidate validated={validated}>
+          <Form.Group className="mb-3 input-group">
+            <div className="input-container col">
+              <Form.Label>
+                Description {!uniqueId && <span className="requiredTxt">*</span>}
+              </Form.Label>
+              <Form.Control
+                as="textarea"
+                className="width-95"
+                placeholder="Enter description"
+                required
+                name="description"
+                onChange={(e) => {
+                  setPostObject((prev) => {
+                    const Current = { ...prev };
+                    Current.description = e.target.value;
+                    return Current;
+                  });
                 }}
-                value="Cancel"
+                value={PostObject.description}
+                disabled={uniqueId}
               />
-              <Button
-                className="buttonPrimary text-center"
-                onClick={() => {
-                  if (PostObject.description.trim().length > 0) {
-                    saveTicket();
-                  } else {
-                    setPostObject((prev) => {
-                      const Current = { ...prev };
-                      Current.description = '';
-                      return Current;
-                    });
-                    setValidated(true);
-                  }
-                }}
-              >
-                {id ? 'Update' : 'Create'}
-              </Button>
+              <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
             </div>
+          </Form.Group>
+          {uniqueId && <Form.Group className="mb-3 input-group">
+            <div className="input-container col">
+              <Form.Label>
+                Additional Details <span className="requiredTxt">*</span>
+              </Form.Label>
+              <Form.Control
+                as="textarea"
+                className="width-95"
+                placeholder="Enter additional description"
+                required
+                name="additional description"
+                onChange={additionalDesc}
+              />
+              <Form.Control.Feedback type="invalid">Additional description is required</Form.Control.Feedback>
+            </div>
+          </Form.Group>}
+          <div className="mb-3 input-group">
+            <Form.Group controlId="siteName" className="input-container col-6 siteName">
+              <Form.Label>
+                Site Name <span className="requiredTxt">*</span>
+              </Form.Label>
+              <Form.Select
+                className={!selectedValue ? 'text-gray width-90' : 'width-90'}
+                required
+                data-testid="siteName"
+                onChange={handleChange}
+                placeholder="Search for Site Name"
+                value={selectedValue}
+              >
+                {options.map((i) => (
+                  <option className="text-black" key={i.value} value={i.value}>
+                    {i.label}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">Site Name is required</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="priority" className="input-container col-5">
+              <Form.Label>Priority {!uniqueId && <span className="requiredTxt">*</span>}</Form.Label>
+              <Form.Select
+                className="width-90"
+                data-testid="priority"
+                onChange={(e) => {
+                  setPostObject((prev) => {
+                    const Current = { ...prev };
+                    Current.priority = e.target.value;
+                    return Current;
+                  });
+                }}
+                value={PostObject.priority}
+                disabled={uniqueId}
+              >
+                {Priority.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </div>
-        </>
-      )}
-    </div>
+          <Form.Group className="mb-3 input-group">
+            <div className="input-container col-6 siteName">
+              <Form.Label>Problem Code {!uniqueId && <span className="requiredTxt">*</span>}</Form.Label>
+              <Form.Select
+                className="width-90"
+                data-testid="problemCode"
+                onChange={(e) => {
+                  setPostObject((prev) => {
+                    const Current = { ...prev };
+                    Current.problem = e.target.value;
+                    return Current;
+                  });
+                }}
+                value={PostObject.problem}
+                disabled={uniqueId}
+              >
+                {ProblemCode.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+            {uniqueId && (
+              <div className="input-container col-5">
+                <Form.Label>Created Date</Form.Label>
+                <Form.Control
+                  placeholder="Created Date"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.createdDate}
+                  disabled
+                />
+              </div>
+            )}
+          </Form.Group>
+          {uniqueId && (
+            <Form.Group className="mb-3 input-group">
+              <div className="input-container col-6 siteName">
+                <Form.Label>Mobile Number</Form.Label>
+                <Form.Control
+                  placeholder="Mobile Number"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.phoneNumber}
+                  disabled
+                />
+              </div>
+              <div className="input-container col-5">
+                <Form.Label>Assigned To</Form.Label>
+                <Form.Control
+                  placeholder="Assigned To"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.assignedTo}
+                  disabled
+                />
+              </div>
+            </Form.Group>
+          )}
+          {uniqueId && (
+            <Form.Group className="mb-3 input-group">
+              <div className="input-container col-6 siteName">
+                <Form.Label>Solution Provided</Form.Label>
+                <Form.Control
+                  placeholder="Solution Provided"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.solutionProvided}
+                  disabled
+                />
+              </div>
+              <div className="input-container col-5">
+                <Form.Label>Client Email</Form.Label>
+                <Form.Control
+                  placeholder="Client Email"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.callerEmail}
+                  disabled
+                />
+              </div>
+            </Form.Group>
+          )}
+          {uniqueId && (
+            <Form.Group className="mb-3 input-group">
+              <div className="input-container col-6 siteName">
+                <Form.Label>Created By</Form.Label>
+                <Form.Control
+                  placeholder="Created By"
+                  type="text"
+                  className="width-90"
+                  value={PostObject.createdBy}
+                  disabled
+                />
+              </div>
+            </Form.Group>
+          )}
+        </Form>
+        <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
+          <input
+            className="buttonDefault text-center minHeight45"
+            type="submit"
+            onClick={closeModal}
+            value="Cancel"
+          />
+          <Button
+            className="buttonPrimary text-center"
+            onClick={() => {
+              if (PostObject.description.trim().length > 0) {
+                saveTicket();
+              } else {
+                setPostObject((prev) => {
+                  const Current = { ...prev };
+                  Current.description = '';
+                  return Current;
+                });
+                setValidated(true);
+              }
+              closeModal();
+            }}
+          >
+            {uniqueId ? 'Update' : 'Create'}
+          </Button>
+        </div>
+      </div>
+    </div >
   );
 }

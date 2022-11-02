@@ -3,7 +3,7 @@ import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { fetchCall } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import { aboutSignet, apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { authentication } from '../../Config/FirebaseConfig';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import Alerts from '../Widgets/Alerts';
@@ -27,24 +27,25 @@ export default function OTPVerification() {
   const [wrongOtp, setWrongOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker('Button');
+  const [agree, setAgree] = useState(false);
 
   useEffect(() => {
-    const firstNameData = dataFromLogin.state.datas.firstName;
-    const lastNameData = dataFromLogin.state.datas.lastName;
-    const organizationNameData = dataFromLogin.state.datas.orgName;
-    const emailData = dataFromLogin.state.datas.orgEmail;
-    const usersIdData = dataFromLogin.state.datas.userId;
+    const firstNameData = localStorage.getItem('firstName');
+    const lastNameData = localStorage.getItem('lastName');
+    const organizationNameData = localStorage.getItem('orgName');
+    const emailData = localStorage.getItem('email');
+    const usersIdData = localStorage.getItem('id');
     setFnameData(firstNameData);
     setLnameData(lastNameData);
     setOrgNameData(organizationNameData);
     setEmailData(emailData);
     setUserIdData(usersIdData);
   }, [
-    dataFromLogin.state.datas.firstName,
-    dataFromLogin.state.datas.lastName,
-    dataFromLogin.state.datas.orgEmail,
-    dataFromLogin.state.datas.orgName,
-    dataFromLogin.state.datas.userId,
+    localStorage.getItem('firstName'),
+    localStorage.getItem('lastName'),
+    localStorage.getItem('orgName'),
+    localStorage.getItem('email'),
+    localStorage.getItem('id'),
   ]);
 
   const [stateData] = useState({
@@ -67,22 +68,22 @@ export default function OTPVerification() {
   const [otpNumber, setOtpNumber] = useState('');
   const [appVerifier, setAppVerifier] = useState(null);
 
-  const phoneNumber = '+1' + phone;
+  const phoneNumber = '+91' + phone;
 
   const generateRecaptcha = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(
       'sign-in-button',
       {
         size: 'invisible',
-        callback: () => {},
+        callback: () => { },
       },
       authentication,
     );
   };
 
   const requestOtp = () => {
-    setToogle(true);
-    if (phone.length === 10) {
+    if (phone.length === 10 && agree === true) {
+      setToogle(true);
       !appVerifier && generateRecaptcha();
       const appRecaptchaVerifier = window.recaptchaVerifier;
       setAppVerifier(appRecaptchaVerifier);
@@ -113,29 +114,31 @@ export default function OTPVerification() {
   };
 
   const updatePhonenumber = async () => {
-    setIsLoading(true);
-    const sendingdata = {
-      firstName: fnameData,
-      lastName: lnameData,
-      orgName: orgNameData,
-      orgEmail: emData,
-      primaryPhone: phone,
-      userId: userIdData,
-    };
-    const response = await fetchCall(APIUrlConstants.UPDATE_PROFILE, apiMethods.POST, sendingdata);
-    const statusCode = response[0];
-    if (httpStatusCode.SUCCESS === statusCode) {
-      buttonTracker(gaEvents.UPDATE_MOBILE_NUMBER);
-      setAlertSucShow(true);
-      navigate('/', { replace: true });
-      Logout();
-    } else {
-      setIsLoading(false);
-      setSucShow(true);
-      setOtpVariant('success');
-      setTimeout(() => {
-        setSucShow(false);
-      }, 5000);
+    if (agree === true) {
+      setIsLoading(true);
+      const sendingdata = {
+        firstName: fnameData,
+        lastName: lnameData,
+        orgName: orgNameData,
+        orgEmail: emData,
+        primaryPhone: phone,
+        userId: userIdData,
+      };
+      const response = await fetchCall(APIUrlConstants.UPDATE_PROFILE, apiMethods.POST, sendingdata);
+      const statusCode = response[0];
+      if (httpStatusCode.SUCCESS === statusCode) {
+        buttonTracker(gaEvents.UPDATE_MOBILE_NUMBER);
+        setAlertSucShow(true);
+        navigate('/', { replace: true });
+        Logout();
+      } else {
+        setIsLoading(false);
+        setSucShow(true);
+        setOtpVariant('success');
+        setTimeout(() => {
+          setSucShow(false);
+        }, 5000);
+      }
     }
   };
   const verifyotp = (e) => {
@@ -179,6 +182,10 @@ export default function OTPVerification() {
     setPhoneUi(formattedPhoneNumber);
     setPhone(event.target.value);
   };
+
+  const onAgreeTermsChanage = (event) => {
+    setAgree(event.target.checked);
+  }
 
   return (
     <Container fluid className="lognWrapper">
@@ -239,58 +246,68 @@ export default function OTPVerification() {
                     <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
                   ) : null}
                 </Form.Group>
+                <div id="sign-in-button" />
+                {toogle &&
+
+                  (
+                    <div className="formFooter d-flex align-items-center justify-content-center flex-column">
+                      <Form.Control
+                        required
+                        className="email-input mTop20"
+                        type="text"
+                        isInvalid={validOTP || wrongOtp}
+                        placeholder="OTP"
+                        autoComplete="off"
+                        onChange={verifyotp}
+                        value={otpNumber}
+                      />
+                      <div className="d-flex flex-row-reverse align-items-center widthFull">
+                        <Button
+                          className="resendOtp"
+                          onClick={() => {
+                            requestOtp();
+                            buttonTracker(gaEvents.RESEND_OTP);
+                          }}
+                        >
+                          Resend OTP
+                        </Button>
+                        {validOTP === true ? <p className="otpVerifyError">Enter a valid OTP</p> : null}
+                      </div>
+                    </div>
+                  )}
+                <Form.Group controlId="formBasicCheckbox" className="customCheck mb-2 mt-2">
+                  <Form.Check.Input
+                    data-testid="termsCheckbox"
+                    required
+                    onChange={onAgreeTermsChanage}
+                  />
+                  <Form.Check.Label className="p-2">Agree to <Link to='/termsandconditions' target='_blank'> terms and conditions </Link></Form.Check.Label>
+                  <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
+                </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column">
-                  {toogle === false && (
-                    <Button
+                  {toogle ? (<Button
+                    variant="primary"
+                    id="verifytest"
+                    className="d-flex align-items-center justify-content-center emailBtn"
+                    onClick={updatePhonenumber}
+                    disabled={btnDisable}
+                  >
+                    Update
+                  </Button>) :
+                    (<Button
                       variant="primary"
                       id="verifytest"
                       type="submit"
                       className="d-flex align-items-center justify-content-center emailBtn"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault();
                         requestOtp();
                         buttonTracker(gaEvents.SEND_OTP);
                       }}
                     >
                       Verify
-                    </Button>
-                  )}
+                    </Button>)}
                 </div>
-                <div id="sign-in-button" />
-                {toogle === true && validPhone === false && (
-                  <div className="formFooter d-flex align-items-center justify-content-center flex-column">
-                    <Form.Control
-                      required
-                      className="email-input -mTop20"
-                      type="text"
-                      isInvalid={validOTP || wrongOtp}
-                      placeholder="OTP"
-                      autoComplete="off"
-                      onChange={verifyotp}
-                      value={otpNumber}
-                    />
-                    <div className="d-flex flex-row-reverse align-items-center widthFull">
-                      <Button
-                        className="resendOtp"
-                        onClick={() => {
-                          requestOtp();
-                          buttonTracker(gaEvents.RESEND_OTP);
-                        }}
-                      >
-                        Resend OTP
-                      </Button>
-                      {validOTP === true ? <p className="otpVerifyError">Enter a valid OTP</p> : null}
-                    </div>
-                    <Button
-                      variant="primary"
-                      id="verifytest"
-                      className="d-flex align-items-center justify-content-center emailBtn"
-                      onClick={updatePhonenumber}
-                      disabled={btnDisable}
-                    >
-                      Update
-                    </Button>
-                  </div>
-                )}
               </Form>
             </div>
           </div>

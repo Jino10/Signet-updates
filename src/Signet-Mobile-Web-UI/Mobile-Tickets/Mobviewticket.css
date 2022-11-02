@@ -1,0 +1,67 @@
+.wrapperTicket {
+    margin: 10px 5px;
+}
+
+.textAlign {
+    text-align: center;
+}
+
+.backButton {
+    background-color: #16216c !important;
+    border: 0px !important;
+}
+
+.buttonAlign {
+    text-align: center;
+}
+
+.editButton {
+    background-color: #16216c !important;
+    border: 0px !important;
+}
+
+.editBtnBody {
+    position: absolute;
+    top: 6%;
+    right: 2%;
+}
+
+@media only screen and (min-width:700px) and (max-width:900px) {
+    .wrapperTicket {
+        width: 80%;
+        margin: 5% 0px 5% 10%;
+        border: 1px solid black;
+    }
+
+    .backButton {
+        background-color: #16216c !important;
+        border: 0px !important;
+        width: 15%;
+    }
+
+    .editBtnBody {
+        position: absolute;
+        top: 5%;
+        right: 2%;
+    }
+}
+
+@media only screen and (min-width:950px) {
+    .wrapperTicket {
+        width: 70%;
+        margin: 5% 0px 5% 15%;
+        border: 1px solid black;
+    }
+
+    .backButton {
+        background-color: #16216c !important;
+        border: 0px !important;
+        width: 15%;
+    }
+
+    .editBtnBody {
+        position: absolute;
+        top: 10%;
+        right: 7%;
+    }
+}

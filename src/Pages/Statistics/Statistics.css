@@ -1,0 +1,50 @@
+.userImage {
+    width: 60%;
+    height: 67%;
+}
+
+.block {
+    background-color: white;
+    text-align: center;
+    width: 90%;
+    height: 100%;
+}
+
+.organizationImage {
+    width: 60%;
+    height: 67%;
+}
+
+.pie-chart {
+    width: 70% !important;
+    height: 75% !important;
+    text-align: center !important;
+    margin-left: 45px !important;
+}
+
+.container {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.organization-table {
+    width: 80%;
+}
+
+.orgs-table {
+    margin: 20px 15px 0px 30px;
+}
+
+.org-head {
+    text-align: center;
+}
+
+.table-data {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.user-table {
+    width: 95%;
+    margin-right: 40px;
+}

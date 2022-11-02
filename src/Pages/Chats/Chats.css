@@ -1,14 +1,100 @@
+.Heading {
+  color: white;
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  font-size: 30px !important;
+}
+
+.playPauseIcons {
+  position: absolute;
+  top: 62%;
+  left: 43%;
+}
+
+.Icons {
+  color: white;
+}
+
+.playIcon {
+  position: absolute;
+  bottom: 55px;
+  left: 1%;
+}
+
+.volumeIcon {
+  position: absolute;
+  bottom: 55px;
+  left: 1%;
+}
+
+.playBackRate {
+  position: absolute;
+  bottom: 55px;
+  left: 34%;
+}
+
+.fullscreen {
+  position: absolute;
+  bottom: 55px;
+  left: 40%;
+}
+
+.volumeSlider {
+  width: 15% !important;
+  color: white !important;
+  position: absolute;
+  bottom: 45px;
+  left: 1%;
+}
+
+.moveSlider {
+  width: 96% !important;
+  color: white !important;
+  position: absolute;
+  bottom: 130px;
+  left: 1%;
+
+}
+
+.currentTime {
+  position: absolute;
+  bottom: 55px;
+  left: 3%;
+}
+
+.totalValue {
+  position: absolute;
+  bottom: 142px;
+  left: 60%;
+}
+
+.moreVertical {
+  position: absolute;
+  bottom: 440px;
+  left: 80%;
+}
+
+.settingsIcon {
+  position: absolute;
+  bottom: 143px;
+  left: 65%;
+}
+
 .videoWrapper {
   width: 60%;
   position: relative;
   border-radius: 10px;
 }
+
 .videoHeader {
   background-color: var(--black);
 }
+
 .wrapperCard .titleHeader {
   padding-left: 0;
 }
+
 .videoHeader {
   background-color: var(--black);
   position: absolute;
@@ -18,9 +104,11 @@
   border-top-right-radius: 10px;
   color: var(--white);
 }
+
 .videoWrapper video {
   border-radius: 10px;
 }
+
 .videoInfo {
   font-family: 'Poppins';
   font-style: normal;
@@ -29,6 +117,7 @@
   line-height: 20px;
   margin: 30px 0;
 }
+
 .contactSalesText {
   padding-top: 20px;
 }
@@ -45,6 +134,7 @@
   .videoWrapper {
     width: 100%;
   }
+
   #fc_frame.fc-widget-fullscreen.fc-widget-normal,
   #fc_frame.fc-widget-fullscreen.fc-widget-small,
   #fc_frame.fc-mobile-view.h-open-container {
@@ -55,6 +145,7 @@
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
+
   .wrapperCard .titleHeader h6,
   .videoHeader h5 {
     font-size: 16px;

@@ -83,14 +83,15 @@ function Mobnotification() {
                     </div>)
                 }
             </div>
-            <div className="pagination">
-                <Button className="saveBtn paginationButton" disabled={firstPage} onClick={() => previous()}>
-                    {'<'}
-                </Button>
-                <Button className="saveBtn paginationButton" disabled={lastPage} onClick={() => next()}>
-                    {'>'}
-                </Button>
-            </div>
+            {!isLoading &&
+                (<div className="pagination">
+                    <Button className="saveBtn paginationButton" disabled={firstPage} onClick={() => previous()}>
+                        {'<'}
+                    </Button>
+                    <Button className="saveBtn paginationButton" disabled={lastPage} onClick={() => next()}>
+                        {'>'}
+                    </Button>
+                </div>)}
         </div>
     );
 }

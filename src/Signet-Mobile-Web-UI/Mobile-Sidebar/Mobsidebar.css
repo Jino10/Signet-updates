@@ -1,6 +1,6 @@
 .signetImg {
     width: 50%;
-    height: 40%;
+    height: 50%;
     margin-top: 20%;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .signetBody {
-    height: 25%;
+    height: 28%;
     background-color: #16216c;
 }
 
@@ -26,9 +26,10 @@
         background: var(--white);
         z-index: 9999999999;
         height: 100%;
-        min-width: 65%;
+        min-width: 70%;
         box-shadow: 1px 2px 3px var(--gray1);
         border-top: 1px solid var(--gray2);
+        white-space: nowrap;
     }
 }
 

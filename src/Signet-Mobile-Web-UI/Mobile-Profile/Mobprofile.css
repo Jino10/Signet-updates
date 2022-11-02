@@ -40,12 +40,13 @@
     .imageBody {
         text-align: center;
         margin-top: 10%;
+        position: relative;
     }
 
     .editIcon {
         position: absolute;
         left: 65%;
-        top: 14%;
+        top: 15%;
         color: #16216c;
     }
 
@@ -69,7 +70,7 @@
     .verBtn {
         position: absolute;
         right: 13%;
-        bottom: 15%;
+        bottom: 13%;
         height: 4% !important;
         background-color: #fff !important;
         color: #16216c;

@@ -32,105 +32,106 @@ function Mobviewticket() {
     return (
         <div className='wrapperTicket'>
             {isLoading && <Loading />}
-            <div>
-                <Form>
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Description :</Form.Label>
-                            <div
-                                className='textAlign'
-                                dangerouslySetInnerHTML={{ __html: ticket?.description }}
-                            />
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Site Name :</Form.Label>
-                            <div className="textAlign"> {ticket?.site} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Priority :</Form.Label>
-                            <div className="textAlign"> {ticket?.priority} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Mobile Number :</Form.Label>
-                            <div className="textAlign"> {ticket?.phoneNumber} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Assigned To :</Form.Label>
-                            <div className="textAlign"> {ticket?.assignedTo} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Solution Provided :</Form.Label>
-                            <div className="textAlign"> {ticket?.solutionProvided} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Client Email :</Form.Label>
-                            <div className="textAlign"> {ticket?.callerEmail} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Created By :</Form.Label>
-                            <div className="textAlign"> {ticket?.createdBy} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Created Date :</Form.Label>
-                            <div className="textAlign"> {ticket?.createdDate} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                    <Form.Group className="mb-3">
-                        <div>
-                            <Form.Label className="view-heading mx-3">Problem Code :</Form.Label>
-                            <div className="textAlign"> {ticket?.problem} </div>
-                        </div>
-                    </Form.Group>
-                    <hr />
-                </Form>
-                <div className='buttonAlign mb-2'>
-                    <Button
-                        className='backButton'
-                        onClick={() => {
-                            navigate("/mobtickets")
-                        }}
-                    >
-                        Back
-                    </Button>
-                </div>
-                <div className='editBtnBody'>
-                    {(ticket?.callerEmail === localStorage.getItem('email')) &&
+            {!isLoading && (
+                <div>
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Description :</Form.Label>
+                                <div
+                                    className='textAlign'
+                                    dangerouslySetInnerHTML={{ __html: ticket?.description }}
+                                />
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Site Name :</Form.Label>
+                                <div className="textAlign"> {ticket?.site} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Priority :</Form.Label>
+                                <div className="textAlign"> {ticket?.priority} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Mobile Number :</Form.Label>
+                                <div className="textAlign"> {ticket?.phoneNumber} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Assigned To :</Form.Label>
+                                <div className="textAlign"> {ticket?.assignedTo} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Solution Provided :</Form.Label>
+                                <div className="textAlign"> {ticket?.solutionProvided} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Client Email :</Form.Label>
+                                <div className="textAlign"> {ticket?.callerEmail} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Created By :</Form.Label>
+                                <div className="textAlign"> {ticket?.createdBy} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Created Date :</Form.Label>
+                                <div className="textAlign"> {ticket?.createdDate} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                        <Form.Group className="mb-3">
+                            <div>
+                                <Form.Label className="view-heading mx-3">Problem Code :</Form.Label>
+                                <div className="textAlign"> {ticket?.problem} </div>
+                            </div>
+                        </Form.Group>
+                        <hr />
+                    </Form>
+                    <div className='buttonAlign mb-2'>
                         <Button
-                            className='editButton'
+                            className='backButton'
                             onClick={() => {
-                                navigate(`/mobeditticket/${ticketId}`)
+                                navigate("/mobtickets")
                             }}
                         >
-                            Edit
+                            Back
                         </Button>
-                    }
-                </div>
-            </div>
+                    </div>
+                    <div className='editBtnBody'>
+                        {(ticket?.callerEmail === localStorage.getItem('email')) &&
+                            <Button
+                                className='editButton'
+                                onClick={() => {
+                                    navigate(`/mobeditticket/${ticketId}`)
+                                }}
+                            >
+                                Edit
+                            </Button>
+                        }
+                    </div>
+                </div>)}
         </div>
     );
 }

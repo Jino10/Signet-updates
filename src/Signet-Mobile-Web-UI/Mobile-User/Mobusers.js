@@ -126,23 +126,25 @@ function Mobusers() {
                         }
                     </div>
                 }
-                <div>
-                    <Button className="plusButton"
-                        onClick={() => {
-                            navigate("/mobadduser");
-                        }}
-                    >
-                        <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" />
-                    </Button>
-                </div>
-                <div className="arrowsBtn">
-                    <Button className="saveBtn paginationButton" onClick={() => previous()}>
-                        {'<'}
-                    </Button>
-                    <Button className="saveBtn paginationButton" onClick={() => next()}>
-                        {'>'}
-                    </Button>
-                </div>
+                {!isLoading &&
+                    (<div>
+                        <Button className="plusButton"
+                            onClick={() => {
+                                navigate("/mobadduser");
+                            }}
+                        >
+                            <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" />
+                        </Button>
+                    </div>)}
+                {!isLoading &&
+                    (<div className="arrowsBtn">
+                        <Button className="saveBtn paginationButton" onClick={() => previous()}>
+                            {'<'}
+                        </Button>
+                        <Button className="saveBtn paginationButton" onClick={() => next()}>
+                            {'>'}
+                        </Button>
+                    </div>)}
             </div>
         </div>
     );

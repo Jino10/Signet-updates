@@ -28,6 +28,8 @@
     background-color: #16216c;
     border: 0px;
     border-radius: 50% !important;
+    height: 7%;
+    width: 15%;
     position: fixed;
     bottom: 20px;
     right: 20px;

@@ -51,12 +51,8 @@
     }
 
     .fieldAlign {
-        width: 85%;
+        width: 100%;
         margin: auto;
-    }
-
-    .phoneNum {
-        margin-left: 12%;
     }
 
     .formBody {
@@ -64,12 +60,12 @@
     }
 
     .numberField {
-        width: 55%;
+        width: 65%;
     }
 
     .verBtn {
         position: absolute;
-        right: 13%;
+        right: 8%;
         bottom: 13%;
         height: 4% !important;
         background-color: #fff !important;

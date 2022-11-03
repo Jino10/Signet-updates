@@ -206,13 +206,13 @@ function Tickets() {
                   <span className='statusAdjacent'>{datas ? initialData?.status : status}</span>
                 </div>
                 <p className='status'>Priority</p>
-                <div className='statusData'>
-                  <span className='arrowSet'><i className={`fa-solid ${arrow ? "fa-arrow-up text-danger" : "fa-arrow-down text-success"}`} /></span>
-                  <span className='priorityAdjacent'>{arrow ? <p>High</p> : <p>Low</p>}</span>
+                <div className='priorityData'>
+                  <span className='priorityAdjacent'><i className={`fa-solid ${arrow ? "fa-arrow-up text-danger" : "fa-arrow-down text-success"}`} />
+                  {arrow ? <span>High</span> : <span>Low</span>}</span>
                 </div>
                 <p className='status'>Assignee</p>
-                <div className='statusData'>
-                  <span className=''><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData?.assignedTo : assignedTo}</span>
+                <div className='assignData'>
+                  <span className='assignAdjacent'><img className='assigneImage' src='/images/signetImage/assign.png' alt='' />{datas ? initialData?.assignedTo : assignedTo}</span>
                 </div>
                 <p className='status'>Created date</p>
                 <h6>{datas ? initialData?.createdDate : createdDate}</h6>

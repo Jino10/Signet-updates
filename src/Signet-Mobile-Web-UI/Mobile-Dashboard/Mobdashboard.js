@@ -70,16 +70,16 @@ export default function Mobdashboard() {
         <Tooltip id="button-tooltip" {...props}>
             <div className="p-2">
                 <p>
-                    <b>{systemAvailability.title}</b>
+                    <b>{systemAvailability?.title}</b>
                 </p>
                 <hr />
                 <div className="d-flex justify-content-between bg-lightred p-1">
                     <span className="">Percent Downtime</span>
-                    <span className="">{systemAvailability.system.systemAvailabilityDTOs[0].percentageDown.toFixed(2)}%</span>
+                    <span className="">{systemAvailability?.system?.systemAvailabilityDTOs[0]?.percentageDown.toFixed(2)}%</span>
                 </div>
                 <div className="d-flex justify-content-between bg-lightgreen p-1 mt-2">
                     <span className="">Percent Uptime</span>
-                    <span className="">{systemAvailability.system.systemAvailabilityDTOs[0].percentageUp.toFixed(2)}%</span>
+                    <span className="">{systemAvailability?.system?.systemAvailabilityDTOs[0]?.percentageUp.toFixed(2)}%</span>
                 </div>
             </div>
         </Tooltip>
@@ -98,28 +98,28 @@ export default function Mobdashboard() {
     );
 
     const renderChart = (type, data) => {
-        if (type === 'ticketByPriority' && data && data.ticket && data.ticket.ticketPrioritys && data.ticket.ticketPrioritys.length) {
+        if (type === 'ticketByPriority' && data && data?.ticket && data?.ticket?.ticketPrioritys && data?.ticket?.ticketPrioritys.length) {
             return (
                 <div className="cardBody">
-                    <VerticalBarChart data={data.ticket.ticketPrioritys} />
+                    <VerticalBarChart data={data?.ticket?.ticketPrioritys} />
                     <p className="chartXaxis">Priority</p>
                 </div>
             );
         }
-        if (type === 'ticketBySite' && data && data.ticket && data.ticket.ticketSites && data.ticket.ticketSites.length) {
+        if (type === 'ticketBySite' && data && data?.ticket && data?.ticket?.ticketSites && data?.ticket?.ticketSites.length) {
             return (
                 <div className="cardBody mt-4">
-                    <DoughnutChart data={data.ticket.ticketSites} />
+                    <DoughnutChart data={data?.ticket?.ticketSites} />
                 </div>
             );
         }
         if (
             type === 'systemCapacity' &&
             data &&
-            data.system &&
-            data.system.systemCapacityDTOs &&
-            data.system.systemCapacityDTOs.length &&
-            data.system.systemCapacityDTOs.filter((sys) => sys.capacity !== 0).length
+            data?.system &&
+            data?.system?.systemCapacityDTOs &&
+            data?.system?.systemCapacityDTOs.length &&
+            data?.system?.systemCapacityDTOs.filter((sys) => sys?.capacity !== 0).length
         ) {
             return (
                 <div className="cardBody mt-5">
@@ -131,10 +131,10 @@ export default function Mobdashboard() {
         if (
             type === 'systemCapacityCopy' &&
             data &&
-            data.system &&
-            data.system.systemCapacityDTOs &&
-            data.system.systemCapacityDTOs.length &&
-            data.system.systemCapacityDTOs.filter((sys) => sys.capacity !== 0).length
+            data?.system &&
+            data?.system?.systemCapacityDTOs &&
+            data?.system?.systemCapacityDTOs.length &&
+            data?.system?.systemCapacityDTOs.filter((sys) => sys?.capacity !== 0).length
         ) {
             return (
                 <div className="cardBody w-100">
@@ -160,9 +160,9 @@ export default function Mobdashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.system.systemCapacityDTOs.map((sys) => (
+                            {data?.system?.systemCapacityDTOs.map((sys) => (
                                 <tr key={sys.capacity}>
-                                    <td className="p-2 text-12"> {sys.key.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())} </td>
+                                    <td className="p-2 text-12"> {sys?.key.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())} </td>
                                     <td className="p-2">
                                         <ProgressBar className="progressWrap" now={sys.capacity.toFixed()} label={sys.capacity.toFixed() + '%'} />
                                     </td>
@@ -176,14 +176,14 @@ export default function Mobdashboard() {
         if (
             type === 'systemAvailability' &&
             data &&
-            data.system &&
-            data.system.systemAvailabilityDTOs &&
-            data.system.systemAvailabilityDTOs &&
-            data.system.systemAvailabilityDTOs.length
+            data?.system &&
+            data?.system?.systemAvailabilityDTOs &&
+            data?.system?.systemAvailabilityDTOs &&
+            data?.system?.systemAvailabilityDTOs.length
         ) {
             return (
                 <div className="d-flex align-items-center">
-                    <p className="wrapperProgressTitle">{data.title}</p>
+                    <p className="wrapperProgressTitle">{data?.title}</p>
                     <div className="wrapperProgress d-flex flex-column w-100">
                         <div className="d-flex align-items-center justify-content-between">
                             <span className="capicityInfo mb-1">
@@ -192,10 +192,10 @@ export default function Mobdashboard() {
                             <span className="capicityInfo mb-1">
                                 <span className="badge bg-lightred text-lightred rounded-circle">.</span> Percentage down
                             </span>
-                            <span className="capicityInfo mb-1">{data.system.systemAvailabilityDTOs[0].percentageUp.toFixed()}%</span>
+                            <span className="capicityInfo mb-1">{data?.system?.systemAvailabilityDTOs[0]?.percentageUp.toFixed()}%</span>
                         </div>
                         <OverlayTrigger placement="top" delay={{ show: 0, hide: 0 }} overlay={renderTooltip}>
-                            <ProgressBar now={data.system.systemAvailabilityDTOs[0].percentageUp.toFixed()} />
+                            <ProgressBar now={data?.system?.systemAvailabilityDTOs[0]?.percentageUp.toFixed()} />
                         </OverlayTrigger>
                         <div className="progressPercentage">
                             <span>0.00%</span>
@@ -209,13 +209,13 @@ export default function Mobdashboard() {
                 </div>
             );
         }
-        if (type === 'numberOfTickets' && data && data.ticket && data.ticket.numberOfTickets) {
+        if (type === 'numberOfTickets' && data && data?.ticket && data?.ticket?.numberOfTickets) {
             return (
                 <div className="cardBody">
                     <div className="text-center  d-flex align-items-center flex-column justify-content-center">
                         <img className="ticketImg" src={process.env.REACT_APP_PUBLIC_URL + 'images/ticket.svg'} alt="Ticket" />
                         <span className="totalTxt">Total Tickets</span>
-                        <h3 className="totalCount">{data.ticket.numberOfTickets}</h3>
+                        <h3 className="totalCount">{data?.ticket?.numberOfTickets}</h3>
                     </div>
                 </div>
             );

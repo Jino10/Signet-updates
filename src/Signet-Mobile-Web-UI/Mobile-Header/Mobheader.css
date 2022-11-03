@@ -11,6 +11,14 @@
     left: 20px;
 }
 
+.clsBtn {
+    color: aliceblue !important;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 2px solid white;
+}
+
 .headerBlock .headTitle {
     text-align: center;
     color: aliceblue;

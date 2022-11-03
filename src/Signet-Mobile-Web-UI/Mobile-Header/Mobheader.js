@@ -26,19 +26,17 @@ function Mobheader() {
         <div>
             <div className="headerBlock">
                 {!sidebarOpen ?
-                    (<img
-                        className="menuBtn"
-                        src={process.env.REACT_APP_PUBLIC_URL + 'images/header/menu.svg'}
+                    (<span className="menuBtn"><img
+                        src='images/header/menu.svg'
                         aria-hidden="true"
                         alt=""
                         onClick={toggleMenu}
-                    />) :
+                    /></span>) :
                     (
-                        <img src="images/signetImage/close.png"
+                        <span className="clsBtn"> <img src="images/signetImage/close.png"
                             alt=""
-                            className="menuBtn"
                             onClick={toggleMenu}
-                        />
+                        /></span>
                     )}
                 <h4 className="headTitle">{title}</h4>
             </div>

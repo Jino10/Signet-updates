@@ -36,75 +36,74 @@ function Mobviewticket() {
                 <div>
                     <Form>
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className='textAlign'>
                                 <Form.Label className="view-heading mx-3">Description :</Form.Label>
                                 <div
-                                    className='textAlign'
                                     dangerouslySetInnerHTML={{ __html: ticket?.description }}
                                 />
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Site Name :</Form.Label>
-                                <div className="textAlign"> {ticket?.site} </div>
+                                <div> {ticket?.site} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Priority :</Form.Label>
-                                <div className="textAlign"> {ticket?.priority} </div>
+                                <div> {ticket?.priority} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Mobile Number :</Form.Label>
-                                <div className="textAlign"> {ticket?.phoneNumber} </div>
+                                <div> {ticket?.phoneNumber} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Assigned To :</Form.Label>
-                                <div className="textAlign"> {ticket?.assignedTo} </div>
+                                <div> {ticket?.assignedTo} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Solution Provided :</Form.Label>
-                                <div className="textAlign"> {ticket?.solutionProvided} </div>
+                                <div> {ticket?.solutionProvided} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Client Email :</Form.Label>
-                                <div className="textAlign"> {ticket?.callerEmail} </div>
+                                <div> {ticket?.callerEmail} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Created By :</Form.Label>
-                                <div className="textAlign"> {ticket?.createdBy} </div>
+                                <div> {ticket?.createdBy} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Created Date :</Form.Label>
-                                <div className="textAlign"> {ticket?.createdDate} </div>
+                                <div> {ticket?.createdDate} </div>
                             </div>
                         </Form.Group>
                         <hr />
                         <Form.Group className="mb-3">
-                            <div>
+                            <div className="textAlign">
                                 <Form.Label className="view-heading mx-3">Problem Code :</Form.Label>
-                                <div className="textAlign"> {ticket?.problem} </div>
+                                <div> {ticket?.problem} </div>
                             </div>
                         </Form.Group>
                         <hr />

@@ -3,7 +3,7 @@
 }
 
 .textAlign {
-    text-align: center;
+    display: flex;
 }
 
 .backButton {
@@ -22,7 +22,7 @@
 
 .editBtnBody {
     position: absolute;
-    top: 6%;
+    top: 8%;
     right: 2%;
 }
 

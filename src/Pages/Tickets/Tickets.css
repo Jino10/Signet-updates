@@ -57,6 +57,26 @@
   text-align: center;
   background-color: #ced4da;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.priorityData {
+  height: 50px;
+  width: 80%;
+  text-align: center;
+  background-color: #ced4da;
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+}
+
+.assignData {
+  height: 50px;
+  width: 80%;
+  text-align: center;
+  background-color: #ced4da;
+  margin-bottom: 10px;
+  position: relative;
 }
 
 .scrollData {
@@ -65,29 +85,26 @@
 
 .statusAdjacent {
   position: absolute;
-  top: 230px;
-  right: 140px;
+  top: 30%;
+  right: 40%;
 }
 
 .priorityAdjacent {
   position: absolute;
-  top: 320px;
-  right: 190px;
+  top: 30%;
+  right: 40%;
 }
 
 .assigneImage {
   height: 5%;
   width: 3%;
   border-radius: 20px;
-  position: absolute;
-  top: 402px;
-  right: 230px;
 }
 
-.arrowSet {
+.assignAdjacent {
   position: absolute;
-  top: 320px;
-  right: 260px;
+  top: 10%;
+  left: 10%;
 }
 
 .pageButtons {

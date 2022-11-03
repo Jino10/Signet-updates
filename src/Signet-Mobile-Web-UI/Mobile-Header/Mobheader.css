@@ -7,16 +7,19 @@
 .menuBtn {
     background-color: aliceblue !important;
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 20px;
+    border: 0px !important;
+    border-radius: 50%;
 }
 
 .clsBtn {
-    color: aliceblue !important;
+    background-color: aliceblue !important;
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 20px;
-    border: 2px solid white;
+    border: 0px !important;
+    border-radius: 50%;
 }
 
 .headerBlock .headTitle {

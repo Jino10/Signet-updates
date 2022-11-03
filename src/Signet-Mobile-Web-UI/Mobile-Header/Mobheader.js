@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useThemeUpdate, useTheme } from "../../Context/MenuContext";
 
 import './Mobheader.css';
@@ -26,17 +27,17 @@ function Mobheader() {
         <div>
             <div className="headerBlock">
                 {!sidebarOpen ?
-                    (<span className="menuBtn"><img
+                    (<Button className="menuBtn"><img
                         src='images/header/menu.svg'
                         aria-hidden="true"
                         alt=""
                         onClick={toggleMenu}
-                    /></span>) :
+                    /></Button>) :
                     (
-                        <span className="clsBtn"> <img src="images/signetImage/close.png"
+                        <Button className="clsBtn"> <img src="images/signetImage/close.png"
                             alt=""
                             onClick={toggleMenu}
-                        /></span>
+                        /></Button>
                     )}
                 <h4 className="headTitle">{title}</h4>
             </div>
